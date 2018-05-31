@@ -164,14 +164,14 @@ nav div {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 50%;
 }
 #loader {
     display: block;
     position: relative;
-    left: 50%;
-    top: 50%;
+    left: 100%;
+    top: 100%;
     width: 100px;
     height: 100px;
     margin: -75px 0 0 -75px;

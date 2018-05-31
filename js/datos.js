@@ -29,7 +29,6 @@
 
     window.onclick   = cerrarModalAlClickAfuera;
     refDatos         = firebase.database().ref().child("datos");
-
   }
 
   //----------------------- CERRAR MODAL AL CLICK AFUERA --------------------------//
@@ -88,7 +87,17 @@
           sector: sector,
           cantidad: cantidad,
           valor: valor
+        } ,function (error) {
+          if (error)
+            alert("ERROR")
+            break;
+          else
+            alert("BIEN")
+            break;
         });
+
+        verificarConexion();
+
         break;
       case ACTUALIZAR:
         refDatoEditar.update({
@@ -134,6 +143,19 @@
       .row( $(this).parents('tr') )
       .remove()
       .draw(false);
+  }
+
+  //--------------------------- VERIFICAR CONEXIÓN ------------------------------//
+
+  function verificarConexion() {
+    var connectedRef = firebase.database().ref(".info/connected");
+    connectedRef.on("value", function(snap) {
+      if (snap.val() === true) {
+        alert("connected");
+      } else {
+        alert("not connected");
+      }
+    });
   }
 
   //----------------------------- GENERAR PDF --------------------------------//
