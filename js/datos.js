@@ -66,17 +66,20 @@
     var valor    = event.target.valor.value;
 
     if (nombre == "" || sector == "" || cantidad == "" || valor == "") {
-      alert("Todos los campos son obligatorios");
+      alertify.set('notifier','position', 'top-center');
+      alertify.error('Todos los campos son obligatorios', 3);
       return;
     }
 
     if (isNaN(cantidad)) {
-      alert("Cantidad: Sólo se admiten valores numéricos");
+      alertify.set('notifier','position', 'top-center');
+      alertify.error('Cantidad: Sólo se admiten valores numéricos', 3);
       return;
     }
 
     if (isNaN(valor)) {
-      alert("Valor: Sólo se admiten valores numéricos");
+      alertify.set('notifier','position', 'top-center');
+      alertify.error('Valor: Sólo se admiten valores numéricos', 3);
       return;
     }
 
@@ -88,12 +91,14 @@
           cantidad: cantidad,
           valor: valor
         } ,function (error) {
-          if (error)
-            alert("ERROR")
-            break;
-          else
-            alert("BIEN")
-            break;
+          if (error){
+            alertify.set('notifier','position', 'bottom-right');
+            alertify.error("ERROR: No se pudo agregar el producto", 2);
+          }
+          else{
+            alertify.set('notifier','position', 'bottom-right');
+            alertify.success("Agregado con éxito", 2);
+          }
         });
 
         verificarConexion();
@@ -150,10 +155,9 @@
   function verificarConexion() {
     var connectedRef = firebase.database().ref(".info/connected");
     connectedRef.on("value", function(snap) {
-      if (snap.val() === true) {
-        alert("connected");
-      } else {
-        alert("not connected");
+      if (snap.val() === false) {
+        alertify.set('notifier','position', 'bottom-right');
+        alertify.error('ERROR: No hay conexión con base de datos', 2);
       }
     });
   }
