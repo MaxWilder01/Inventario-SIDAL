@@ -82,6 +82,11 @@ nav div {
   margin-top: 30px;
 }
 
+#btn-enviar {
+  background: #2b3d53;
+  border: none;
+}
+
 .form-control {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
@@ -92,6 +97,18 @@ nav div {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
+}
+
+.btn-warning {
+  background: #ed9b28;
+}
+
+.btn-danger {
+  background: #c53531;
+}
+
+.btn-success {
+  background: #419641;
 }
 
 .editar {
@@ -119,7 +136,7 @@ nav div {
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 500px;
+    width: 600px;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
@@ -147,6 +164,9 @@ nav div {
   width:200pt;
   height: 20pt;
   border: 1px solid #757575;
+  font-family: Roboto;
+  font-weight: lighter;
+  font-size: 11sp;
 }
 
 .dataTables_filter input:focus {
