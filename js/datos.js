@@ -28,7 +28,7 @@
     modo             =  CREAR;
 
     window.onclick   = cerrarModalAlClickAfuera;
-    refDatos         = firebase.database().ref().child("productos-agroquimicos");
+    refDatos         = firebase.database().ref().child("productos-agroquimicos");    
   }
 
   //----------------------- CERRAR MODAL AL CLICK AFUERA --------------------------//
@@ -80,16 +80,13 @@
     switch (modo) {
       case CREAR:
         refDatos.push({
-          nombre         : datos[0], compuesto   : datos[1], formato     : datos[2], control    : datos[3],
-          presentacion   : datos[4], dosis       : datos[5], residualidad: datos[6], sinergismos: datos[7], recomendaciones: datos[8]
+          nombre         : datos[0], compuesto   : datos[1],
+          formato        : datos[2], control     : datos[3],
+          presentacion   : datos[4], dosis       : datos[5],
+          residualidad   : datos[6], sinergismos : datos[7], recomendaciones: datos[8]
         } ,function (error) {
-          alertify.set('notifier','position', 'bottom-right');
-          if (error){
-            alertify.error("ERROR: No se pudo agregar el producto", 2);
-          }
-          else{
-            alertify.success("Agregado con éxito", 2);
-          }
+            alertify.set('notifier','position', 'bottom-right');
+            (error) ? alertify.error("No se pudo agregar el producto") : alertify.success("Agregado con éxito");
         });
 
         verificarConexion();

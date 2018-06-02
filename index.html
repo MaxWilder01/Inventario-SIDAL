@@ -117,16 +117,21 @@
           "pageLength" : 13
        });
 
-      var rootRef=firebase.database().ref().child("datos")
+      var rootRef=firebase.database().ref().child("productos-agroquimicos")
       var table = $('#tabla-datos').DataTable();
 
       //------------------------------- AGREGAR ------------------------------//
 
       rootRef.on("child_added",snap => {
       var dataSet = [snap.child("nombre").val(),
-                     snap.child("sector").val(),
-                     snap.child("cantidad").val(),
-                     snap.child("valor").val(),
+                     snap.child("compuesto").val(),
+                     snap.child("formato").val(),
+                     snap.child("presentacion").val(),
+                     snap.child("dosis").val(),
+                     snap.child("control").val(),
+                     snap.child("residualidad").val(),
+                     snap.child("sinergismos").val(),
+                     snap.child("recomendaciones").val(),
                      '<button id="btn-editar" class="btn btn-warning btn-xs editar" data="'
                      + snap.key +'"><span class="glyphicon glyphicon-pencil"></span></button>',
                      '<button class="btn btn-danger btn-xs borrar" data="'
@@ -141,17 +146,17 @@
       //------------------------------- EDITAR ------------------------------//
 
       rootRef.on("child_changed", snap => {
-        var nombre = snap.child("nombre").val();
-        var sector = snap.child("sector").val();
-        var cantidad = snap.child("cantidad").val();
-        var valor = snap.child("valor").val();
-
         document.getElementsByClassName(snap.key)[0].innerHTML =
          "<tr id='" + snap.key +"'>" +
-            "<td class='sorting_1'>" + snap.child("nombre").val() + "</td>"+
-            "<td>" + snap.child("sector").val() + "</td>"+
-            "<td>" + snap.child("cantidad").val() + "</td>"+
-            "<td>" + snap.child("valor").val() + "</td>"+
+            "<td'>"+ snap.child("nombre").val() + "</td>"+
+            "<td>" + snap.child("compuesto").val() + "</td>"+
+            "<td>" + snap.child("formato").val() + "</td>"+
+            "<td>" + snap.child("presentacion").val() + "</td>"+
+            "<td>" + snap.child("dosis").val() + "</td>"+
+            "<td>" + snap.child("control").val() + "</td>"+
+            "<td>" + snap.child("residualidad").val() + "</td>"+
+            "<td>" + snap.child("sinergismos").val() + "</td>"+
+            "<td>" + snap.child("recomendaciones").val() + "</td>"+
             "<td>" +'<button id="btn-editar" class="btn btn-warning btn-xs editar" data="'
             + snap.key +'"><span class="glyphicon glyphicon-pencil"></span></button>' + "</td>"+
             "<td>" + '<button class="btn btn-danger btn-xs borrar" data="'
@@ -266,7 +271,7 @@
                 <th>Residualidad</th>
                 <th>Sinergismos</th>
                 <th>Recomendaciones</th>
-
+                <th></th>
                 <th class="col-sm-1">
                   <button type="button" name="button" class="btn btn-success btn-xs glyphicon glyphicon-plus" id="btn-agregar"></button>
                 </th>
