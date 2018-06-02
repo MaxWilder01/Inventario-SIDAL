@@ -28,7 +28,7 @@
     modo             =  CREAR;
 
     window.onclick   = cerrarModalAlClickAfuera;
-    refDatos         = firebase.database().ref().child("datos");
+    refDatos         = firebase.database().ref().child("productos-agroquimicos");
   }
 
   //----------------------- CERRAR MODAL AL CLICK AFUERA --------------------------//
@@ -60,43 +60,34 @@
   function enviarDatosFirebase(event) {
     event.preventDefault();
 
-    var nombre   = event.target.nombre.value;
-    var sector   = event.target.sector.value;
-    var cantidad = event.target.cantidad.value;
-    var valor    = event.target.valor.value;
+    var datos = [];
+    datos[0]  = event.target.nombre.value;
+    datos[1]  = opcionElegida('compuesto');
+    datos[2]  = opcionElegida('formato');
+    datos[3]  = opcionElegida('control');
+    datos[4]  = event.target.presentacion.value;
+    datos[5]  = event.target.dosis.value;
+    datos[6]  = event.target.residualidad.value;
+    datos[7]  = event.target.sinergismos.value;
+    datos[8]  = event.target.recomendaciones.value;
 
-    if (nombre == "" || sector == "" || cantidad == "" || valor == "") {
+    if (validarCamposObligatorios(datos) == false) {
       alertify.set('notifier','position', 'top-center');
       alertify.error('Todos los campos son obligatorios', 3);
-      return;
-    }
-
-    if (isNaN(cantidad)) {
-      alertify.set('notifier','position', 'top-center');
-      alertify.error('Cantidad: Sólo se admiten valores numéricos', 3);
-      return;
-    }
-
-    if (isNaN(valor)) {
-      alertify.set('notifier','position', 'top-center');
-      alertify.error('Valor: Sólo se admiten valores numéricos', 3);
       return;
     }
 
     switch (modo) {
       case CREAR:
         refDatos.push({
-          nombre: nombre,
-          sector: sector,
-          cantidad: cantidad,
-          valor: valor
+          nombre         : datos[0], compuesto   : datos[1], formato     : datos[2], control    : datos[3],
+          presentacion   : datos[4], dosis       : datos[5], residualidad: datos[6], sinergismos: datos[7], recomendaciones: datos[8]
         } ,function (error) {
+          alertify.set('notifier','position', 'bottom-right');
           if (error){
-            alertify.set('notifier','position', 'bottom-right');
             alertify.error("ERROR: No se pudo agregar el producto", 2);
           }
           else{
-            alertify.set('notifier','position', 'bottom-right');
             alertify.success("Agregado con éxito", 2);
           }
         });
@@ -160,6 +151,30 @@
         alertify.error('ERROR: No hay conexión con base de datos', 2);
       }
     });
+  }
+
+  //------------------- VALIDAR QUE ESTÉN TODOS LOS DATOS ----------------------//
+
+  function validarCamposObligatorios(datos) {
+    var validador = true;
+    for (var i = 0; i < datos.length; i++) {
+      if (datos[i] == "") {
+        validador = false;
+        break;
+      }
+    }
+    return validador;
+  }
+
+  //-------------------- OBTENER VALOR DE OPCIÓN ELEGIDA -----------------------//
+
+  function opcionElegida(id) {
+    var elt = document.getElementById(id);
+
+    if (elt.selectedIndex == -1)
+        return null;
+
+    return elt.options[elt.selectedIndex].text;
   }
 
   //----------------------------- GENERAR PDF --------------------------------//

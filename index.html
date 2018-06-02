@@ -188,7 +188,7 @@
             <div class="form-group col-sm-12">
               <div style="margin:0; padding: 0;" class="col-sm-4">
                 <label for="Compuesto">Compuesto</label>
-                <select style="width: 131pt; height:27pt;"name="compuesto-list" form="compuesto-form">
+                <select style="width: 131pt; height:27pt;"name="compuesto" id="compuesto"form="compuesto-form">
                   <option value="Glifosfato">Glifosfato</option>
                   <option value="Compuesto Ejemplo 2">Compuesto Ejemplo 2</option>
                   <option value="Compuesto Ejemplo 3">Compuesto Ejemplo 3</option>
@@ -198,7 +198,7 @@
 
               <div style="margin:0; padding: 0;" class="col-sm-4">
                 <label for="formato">Formato</label>
-                <select style="width: 131pt; height:27pt;" name="formato-list" form="formato-form">
+                <select style="width: 131pt; height:27pt;" name="formato" id="formato" form="formato-form">
                   <option value="Líquido">Líquido</option>
                   <option value="Compuesto Dispersable">Compuesto Dispersable</option>
                   <option value="Formato Ejemplo 3">Formato Ejemplo 3</option>
@@ -208,7 +208,7 @@
 
               <div style="margin:0; padding: 0;" class="col-sm-4">
                 <label for="control">Tipo de control</label>
-                <select style="width: 131pt; height:27pt;" name="control-list" form="control-form">
+                <select style="width: 131pt; height:27pt;" name="control" id="control" form="control-form">
                   <option value="Herbicida">Herbicida</option>
                   <option value="Fungicida">Fungicida</option>
                   <option value="Pesticida">Pesticida</option>
@@ -220,17 +220,17 @@
 
             <div class="form-group col-sm-12">
               <div style="margin:0; padding: 0;" class="col-sm-4">
-                <label for="valor">Presentación</label>
+                <label for="valor">Presentación (litros)</label>
                 <input style="width: 131pt;" type="number" min="0" name="presentacion" value="" id="presentacion" class="form-control" autocomplete="off">
               </div>
 
               <div style="margin:0; padding: 0;" class="col-sm-4">
-                <label for="dosis">Dosis Recomendada</label>
+                <label for="dosis">Dosis Recomendada (l/ha)</label>
                 <input style="width: 131pt;" type="number" min="0" name="dosis" value="" id="dosis" class="form-control" step="0.1" autocomplete="off">
               </div>
 
               <div style="margin:0; padding: 0;" class="col-sm-4">
-                <label for="residualidad">Residualidad</label>
+                <label for="residualidad">Residualidad (días)</label>
                 <input style="width: 131pt;" type="number" min="0" name="residualidad" value="" id="residualidad" class="form-control" autocomplete="off">
               </div>
             </div>
@@ -247,7 +247,7 @@
                 <input type="text" name="recomendaciones" value="" id="recomendaciones" class="form-control" step="0.1" autocomplete="off">
               </div>
             </div>
-            <input style="margin-left: 11pt; margin-rigth: 11pt; width:396pt; "type="submit" name="enviar" value="Agregar" class="btn btn-primary btn-lg" id="btn-enviar">
+            <input style="margin-left: 11pt; margin-right: 11pt; width:396pt; "type="submit" name="enviar" value="Agregar" class="btn btn-primary btn-lg" id="btn-enviar">
           </form>
         </div>
       </div>
@@ -257,18 +257,23 @@
           <table id="tabla-datos" class="table table-hover compact">
             <thead>
               <tr>
-                <th class="col-sm-3">Nombre</th>
-                <th class="col-sm-3">Sector</th>
-                <th class="col-sm-2">Cantidad</th>
-                <th class="col-sm-2">Valor</th>
-                <th class="col-sm-1"></th>
+                <th>Nombre Comercial</th>
+                <th>Compuesto</th>
+                <th>Formato</th>
+                <th>Presentación</th>
+                <th>Dosis</th>
+                <th>Tipo de Control</th>
+                <th>Residualidad</th>
+                <th>Sinergismos</th>
+                <th>Recomendaciones</th>
+
                 <th class="col-sm-1">
                   <button type="button" name="button" class="btn btn-success btn-xs glyphicon glyphicon-plus" id="btn-agregar"></button>
                 </th>
               </tr>
             </thead>
             <tbody id="tbody-tabla-datos">
-              <div style="margin-top: 20px" id="preloader">
+              <div style="display: none; margin-top: 20px" id="preloader">
                   <div id="loader"></div>
               </div>
             </tbody>
