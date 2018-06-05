@@ -50,6 +50,11 @@ nav div {
   padding: 0;
 }
 
+td, th {
+  word-wrap: break-word;
+  max-width: 75pt;
+}
+
 #form-datos {
   margin-top: 20px;
 }
@@ -61,6 +66,25 @@ nav div {
 
 #row {
   margin: auto;
+  max-width: 100%;
+}
+
+th:nth-child(4), th:nth-child(5), th:nth-child(7) {
+  text-align: center;
+}
+
+td {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+td:not(:nth-last-child(2)):hover {
+  max-width : initial;
+}
+
+td:nth-child(4), td:nth-child(5), td:nth-child(7) {
+  text-align: center;
 }
 
 .loader {
@@ -120,7 +144,7 @@ nav div {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 70px; /* Location of the box */
+    padding-top: 80px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */

@@ -28,7 +28,7 @@
     modo             =  CREAR;
 
     window.onclick   = cerrarModalAlClickAfuera;
-    refDatos         = firebase.database().ref().child("productos-agroquimicos");    
+    refDatos         = firebase.database().ref().child("productos-agroquimicos");
   }
 
   //----------------------- CERRAR MODAL AL CLICK AFUERA --------------------------//
@@ -71,7 +71,7 @@
     datos[7]  = event.target.sinergismos.value;
     datos[8]  = event.target.recomendaciones.value;
 
-    if (validarCamposObligatorios(datos) == false) {
+    if (modo == CREAR && validarCamposObligatorios(datos) == false) {
       alertify.set('notifier','position', 'top-center');
       alertify.error('Todos los campos son obligatorios', 3);
       return;
@@ -94,10 +94,13 @@
         break;
       case ACTUALIZAR:
         refDatoEditar.update({
-          nombre: nombre,
-          sector: sector,
-          cantidad: cantidad,
-          valor: valor
+          nombre         : datos[0], compuesto   : datos[1],
+          formato        : datos[2], control     : datos[3],
+          presentacion   : datos[4], dosis       : datos[5],
+          residualidad   : datos[6], sinergismos : datos[7], recomendaciones: datos[8]
+        },function (error) {
+            alertify.set('notifier','position', 'bottom-right');
+            (error) ? alertify.error("No se pudo editar el producto") : alertify.success("Editado con éxito");
         });
         modo = CREAR;
       break;
@@ -114,10 +117,15 @@
 
     refDatoEditar.once("value", function (snap) {
       var datos = snap.val();
-      document.getElementById("nombre").value = datos.nombre;
-      document.getElementById("sector").value = datos.sector;
-      document.getElementById("cantidad").value = datos.cantidad;
-      document.getElementById("valor").value  = datos.valor;
+      document.getElementById("nombre").value           = datos.nombre;
+      document.getElementById("compuesto").value        = datos.compuesto;
+      document.getElementById("formato").value          = datos.formato;
+      document.getElementById("presentacion").value     = datos.presentacion;
+      document.getElementById("dosis").value            = datos.dosis;
+      document.getElementById("control").value          = datos.control;
+      document.getElementById("residualidad").value     = datos.residualidad;
+      document.getElementById("sinergismos").value      = datos.sinergismos;
+      document.getElementById("recomendaciones").value  = datos.recomendaciones;
     });
 
     modo = ACTUALIZAR;
@@ -127,8 +135,11 @@
   //------------------------------ BORRAR DATO ---------------------------------//
 
   function borrarDato() {
+    if (!confirm("¿Seguro que desea borrar?")) return;
+
     var keyDatoBorrar = this.getAttribute("data");
     var refDatoBorrar = refDatos.child(keyDatoBorrar);
+
     refDatoBorrar.remove();
 
     var table = $('#tabla-datos').DataTable();
