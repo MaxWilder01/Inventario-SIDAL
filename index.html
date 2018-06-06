@@ -91,6 +91,7 @@
             { "orderable": false, "targets": '_all' }
           ],
           "bLengthChange": false,
+          "bSort" : false,
           createdRow: function ( tr ) {
               $('.editar', tr).on('click', editarDato);
               $('.borrar', tr).on('click', borrarDato);
@@ -165,7 +166,6 @@
           $(".editar").on("click", editarDato);
           $(".borrar").on("click", borrarDato);
       });
-
       });
     </script>
   </head>
@@ -200,10 +200,8 @@
               <div style="margin:0; padding: 0;" class="col-sm-4">
                 <label for="Compuesto">Compuesto <span style="color: #c53531">*</span></label>
                 <select style="width: 131pt; height:27pt;"name="compuesto" id="compuesto"form="compuesto-form">
-                  <option value="Glifosfato">Glifosfato</option>
-                  <option value="Compuesto Ejemplo 2">Compuesto Ejemplo 2</option>
-                  <option value="Compuesto Ejemplo 3">Compuesto Ejemplo 3</option>
-                  <option value="Compuesto Ejemplo 4">Compuesto Ejemplo 4</option>
+                  <option value="Glifosato">Glifosato</option>
+                  <option value="Glufosinato">Glufosinato</option>
                 </select>
               </div>
 
@@ -212,8 +210,6 @@
                 <select style="width: 131pt; height:27pt;" name="formato" id="formato" form="formato-form">
                   <option value="Líquido">Líquido</option>
                   <option value="Compuesto Dispersable">Compuesto Dispersable</option>
-                  <option value="Formato Ejemplo 3">Formato Ejemplo 3</option>
-                  <option value="Formato Ejemplo 4">Formato Ejemplo 4</option>
                 </select>
               </div>
 
@@ -265,30 +261,33 @@
       <div class=" col-sm-12 row" id="row">
         <div class="col-sm-12 card">
           <h3>Productos Agrícolas</h3>
-          <table id="tabla-datos" class="table table-hover compact table-responsive">
-            <thead>
-              <tr>
-                <th>Nombre Comercial</th>
-                <th>Compuesto</th>
-                <th>Formato</th>
-                <th>Presentación</th>
-                <th>Dosis</th>
-                <th>Tipo de Control</th>
-                <th>Residualidad</th>
-                <th>Sinergismos</th>
-                <th>Recomendaciones</th>
-                <th></th>
-                <th>
-                  <button type="button" name="button" class="btn btn-success btn-xs glyphicon glyphicon-plus" id="btn-agregar"></button>
-                </th>
-              </tr>
-            </thead>
-            <tbody id="tbody-tabla-datos">
-              <div style="display: none; margin-top: 20px" id="preloader">
-                  <div id="loader"></div>
-              </div>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table id="tabla-datos" class="table table-hover compact">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Compuesto</th>
+                  <th>Formato</th>
+                  <th>Presentación</th>
+                  <th>Dosis</th>
+                  <th>Tipo de Control</th>
+                  <th>Residualidad</th>
+                  <th>Sinergismos</th>
+                  <th>Recomendaciones</th>
+                  <th></th>
+                  <th>
+                    <button type="button" name="button" class="btn btn-success btn-xs glyphicon glyphicon-plus" id="btn-agregar"></button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="tbody-tabla-datos">
+                <div style="display: none; margin-top: 20px" id="preloader">
+                    <div id="loader"></div>
+                </div>
+              </tbody>
+            </table>
+          </div>
+
         </div>
       </div>
     </div>

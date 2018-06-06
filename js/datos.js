@@ -28,7 +28,7 @@
     modo             =  CREAR;
 
     window.onclick   = cerrarModalAlClickAfuera;
-    refDatos         = firebase.database().ref().child("productos-agroquimicos");
+    refDatos         = firebase.database().ref().child("productos-agroquimicos");    
   }
 
   //----------------------- CERRAR MODAL AL CLICK AFUERA --------------------------//
@@ -183,6 +183,26 @@
         return null;
 
     return elt.options[elt.selectedIndex].text;
+  }
+
+  //--------------------------- GENERAR PRODUCTOS ------------------------------//
+
+  function generarProductos(cantidad) {
+    for (var i = 0; i < cantidad; i++) {
+      var nombresProductos = ["Afalon", "Afalon", "Asulox","Basta","Betanal","Brodal","Cobex","Cobra","Digital","Diuron","Furore","Galtac","Hussar","Iloxan","Isomero","Liberty","Logico","Merlin","Rango","Staric","Premerge","Prilan"];
+
+      var compuesto = (Math.floor((Math.random() * 2) + 1) == 1) ? "Glifosato" : "Glufosinato";
+      var control = (Math.floor((Math.random() * 2) + 1) == 1) ? "Herbicida" : "Fertilizante foliar";
+      var formato = (Math.floor((Math.random() * 2) + 1) == 1) ? "Líquido" : "Compuesto Dispersable";
+      var nombre = nombresProductos[i];
+
+      refDatos.push({
+        nombre         : nombre, compuesto   : compuesto,
+        formato        : formato, control     : control,
+        presentacion   : i+3, dosis       : i+0.1,
+        residualidad   : i+2, sinergismos : "Líquido", recomendaciones: (i+1) + " litros"
+      });
+    }
   }
 
   //----------------------------- GENERAR PDF --------------------------------//

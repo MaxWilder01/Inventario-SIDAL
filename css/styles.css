@@ -3,6 +3,7 @@ body {
   padding: 0;
   margin-top: -20px;
   background: #eeeded;
+  overflow: hidden;
 }
 
 nav {
@@ -66,6 +67,7 @@ td, th {
 
 #row {
   margin: auto;
+  margin-top: -7pt;
   max-width: 100%;
 }
 
@@ -78,6 +80,15 @@ td {
   min-width: 12pt;
   overflow: hidden;
   white-space: nowrap;
+  font-size: 11pt;
+}
+
+tr {
+  max-width: 0;
+  min-width: 12pt;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 11pt;
 }
 
 td:not(:nth-last-child(2)):hover {
@@ -87,6 +98,14 @@ td:not(:nth-last-child(2)):hover {
 
 td:nth-child(4), td:nth-child(5), td:nth-child(7) {
   text-align: center;
+}
+
+td:nth-child(6) {
+  min-width: 100pt;
+}
+
+td:nth-child(3) {
+  min-width: 120pt;
 }
 
 .loader {
