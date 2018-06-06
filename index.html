@@ -147,7 +147,7 @@
       rootRef.on("child_changed", snap => {
         document.getElementsByClassName(snap.key)[0].innerHTML =
          "<tr id='" + snap.key +"'>" +
-            "<td'>"+ snap.child("nombre").val() + "</td>"+
+            "<td>"+ snap.child("nombre").val() + "</td>"+
             "<td>" + snap.child("compuesto").val() + "</td>"+
             "<td>" + snap.child("formato").val() + "</td>"+
             "<td>" + snap.child("presentacion").val() + "</td>"+
@@ -265,7 +265,7 @@
       <div class=" col-sm-12 row" id="row">
         <div class="col-sm-12 card">
           <h3>Productos Agrícolas</h3>
-          <table id="tabla-datos" class="table table-hover compact">
+          <table id="tabla-datos" class="table table-hover compact table-responsive">
             <thead>
               <tr>
                 <th>Nombre Comercial</th>
