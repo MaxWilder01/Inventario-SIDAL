@@ -3,7 +3,7 @@ body {
   padding: 0;
   margin-top: -20px;
   background: #eeeded;
-  overflow: hidden;
+  overflow-y: hidden;
 }
 
 nav {
