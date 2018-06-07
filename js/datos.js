@@ -28,7 +28,7 @@
     modo             =  CREAR;
 
     window.onclick   = cerrarModalAlClickAfuera;
-    refDatos         = firebase.database().ref().child("productos-agroquimicos");    
+    refDatos         = firebase.database().ref().child("productos-agroquimicos");
   }
 
   //----------------------- CERRAR MODAL AL CLICK AFUERA --------------------------//
@@ -37,6 +37,9 @@
     if (event.target == modal) {
         modal.style.display = "none";
         document.getElementById("form-datos").reset();
+        document.getElementById("compuesto").value = "Glifosato";
+        document.getElementById("formato").value   = "Líquido";
+        document.getElementById("control").value   = "Herbicida";
     }
   }
 
@@ -53,6 +56,9 @@
     modal.style.display = "none";
     modo = "CREAR";
     document.getElementById("form-datos").reset();
+    document.getElementById("compuesto").value = "Glifosato";
+    document.getElementById("formato").value   = "Líquido";
+    document.getElementById("control").value   = "Herbicida";
   }
 
   //-------------------------- ENVIAR DATOS FIREBASE -----------------------------//
@@ -140,7 +146,12 @@
     var keyDatoBorrar = this.getAttribute("data");
     var refDatoBorrar = refDatos.child(keyDatoBorrar);
 
-    refDatoBorrar.remove();
+    refDatoBorrar.remove()
+    .then(function() {
+        alertify.success("Producto eliminado")
+    }).catch(function(error) {
+        alertify.error("No se pudo eliminar el producto")
+    });;
 
     var table = $('#tabla-datos').DataTable();
     table
@@ -189,18 +200,18 @@
 
   function generarProductos(cantidad) {
     for (var i = 0; i < cantidad; i++) {
-      var nombresProductos = ["Afalon", "Afalon", "Asulox","Basta","Betanal","Brodal","Cobex","Cobra","Digital","Diuron","Furore","Galtac","Hussar","Iloxan","Isomero","Liberty","Logico","Merlin","Rango","Staric","Premerge","Prilan"];
+      var nombresProductos = ["Afalon", "Asulox","Basta","Betanal","Brodal","Cobex","Cobra","Digital","Diuron","Furore","Galtac","Hussar","Iloxan","Isomero","Liberty","Logico","Merlin","Rango","Staric","Premerge","Prilan"];
 
       var compuesto = (Math.floor((Math.random() * 2) + 1) == 1) ? "Glifosato" : "Glufosinato";
-      var control = (Math.floor((Math.random() * 2) + 1) == 1) ? "Herbicida" : "Fertilizante foliar";
-      var formato = (Math.floor((Math.random() * 2) + 1) == 1) ? "Líquido" : "Compuesto Dispersable";
-      var nombre = nombresProductos[i];
+      var control   = (Math.floor((Math.random() * 2) + 1) == 1) ? "Herbicida" : "Fertilizante foliar";
+      var formato   = (Math.floor((Math.random() * 2) + 1) == 1) ? "Líquido" : "Compuesto Dispersable";
+      var nombre    = nombresProductos[i];
 
       refDatos.push({
-        nombre         : nombre, compuesto   : compuesto,
-        formato        : formato, control     : control,
-        presentacion   : i+3, dosis       : i+0.1,
-        residualidad   : i+2, sinergismos : "Líquido", recomendaciones: (i+1) + " litros"
+        nombre         : nombre   , compuesto   : compuesto,
+        formato        : formato  , control     : control,
+        presentacion   : i + 3    , dosis       : i + 0.1,
+        residualidad   : i + 2    , sinergismos : "Líquido", recomendaciones: (i+1) + " litros"
       });
     }
   }
