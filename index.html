@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Inventario</title>
 
     <!-- FONTS -->
@@ -61,7 +62,8 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.16/r-2.2.1/datatables.min.css"/>
 
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.16/r-2.2.1/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.16/r-2.2.1/datatables.min.js">
+    </script>
 
     <!-- JSPDF -->
     <!--------------------------------------------------------------------------->
@@ -91,7 +93,7 @@
             { "orderable": false, "targets": '_all' }
           ],
           "bLengthChange": false,
-          "bSort" : false,
+
           createdRow: function ( tr ) {
               $('.editar', tr).on('click', editarDato);
               $('.borrar', tr).on('click', borrarDato);

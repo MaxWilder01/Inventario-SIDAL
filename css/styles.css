@@ -3,7 +3,6 @@ body {
   padding: 0;
   margin-top: -20px;
   background: #eeeded;
-  overflow-y: hidden;
 }
 
 nav {
@@ -77,7 +76,7 @@ th:nth-child(4), th:nth-child(5), th:nth-child(7) {
 
 td {
   max-width: 0;
-  min-width: 12pt;
+  min-width: 20pt;
   overflow: hidden;
   white-space: nowrap;
   font-size: 11pt;

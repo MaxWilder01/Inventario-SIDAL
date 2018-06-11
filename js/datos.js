@@ -21,7 +21,7 @@
     formDatos        .addEventListener("submit", enviarDatosFirebase, false);
     botonCerrarModal .addEventListener("click" , cerrarModal        , false);
     botonAgregar     .addEventListener("click" , mostrarModal       , false);
-    botonPDF         .addEventListener("click" , generarPDF         , false);
+    //botonPDF         .addEventListener("click" , generarPDF         , false);
 
     CREAR            = "CREAR";
     ACTUALIZAR       = "ACTUALIZAR";
@@ -29,6 +29,8 @@
 
     window.onclick   = cerrarModalAlClickAfuera;
     refDatos         = firebase.database().ref().child("productos-agroquimicos");
+
+    $('input[type="search"]').val('asd')
   }
 
   //----------------------- CERRAR MODAL AL CLICK AFUERA --------------------------//
@@ -199,19 +201,18 @@
   //--------------------------- GENERAR PRODUCTOS ------------------------------//
 
   function generarProductos(cantidad) {
-    for (var i = 0; i < cantidad; i++) {
-      var nombresProductos = ["Afalon", "Asulox","Basta","Betanal","Brodal","Cobex","Cobra","Digital","Diuron","Furore","Galtac","Hussar","Iloxan","Isomero","Liberty","Logico","Merlin","Rango","Staric","Premerge","Prilan"];
+    var nombresProductos = ["Afalon", "Asulox","Basta","Betanal","Brodal","Cobex","Cobra","Digital","Diuron","Furore","Galtac","Hussar","Iloxan","Isomero","Liberty","Logico","Merlin","Rango","Staric","Premerge","Prilan"];
 
+    for (var i = 0; i < (cantidad > cantidad.length) ? cantidad.length : cantidad; i++) {
       var compuesto = (Math.floor((Math.random() * 2) + 1) == 1) ? "Glifosato" : "Glufosinato";
       var control   = (Math.floor((Math.random() * 2) + 1) == 1) ? "Herbicida" : "Fertilizante foliar";
       var formato   = (Math.floor((Math.random() * 2) + 1) == 1) ? "Líquido" : "Compuesto Dispersable";
       var nombre    = nombresProductos[i];
 
       refDatos.push({
-        nombre         : nombre   , compuesto   : compuesto,
-        formato        : formato  , control     : control,
-        presentacion   : i + 3    , dosis       : i + 0.1,
-        residualidad   : i + 2    , sinergismos : "Líquido", recomendaciones: (i+1) + " litros"
+        nombre       : nombre   , compuesto    : compuesto , formato         : formato   ,
+        control      : control  , presentacion : i + 3     , dosis           : i + 0.1   ,
+        residualidad : i + 2    , sinergismos  : "Líquido" , recomendaciones : (i + 1) + " litros"
       });
     }
   }
