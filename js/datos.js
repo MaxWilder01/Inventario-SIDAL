@@ -225,3 +225,12 @@
     doc.fromHTML($('#tabla-datos').get(0), 20, 20, {width: 500});
     doc.save('Hola.pdf');
   }
+
+  //----------------------------- LOGOUT --------------------------------//
+  function logout() {
+
+    firebase.auth().signOut();
+    localStorage.setItem("admin", false);
+    window.location.href = "../index.html";
+  }
+
