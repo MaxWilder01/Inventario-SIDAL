@@ -28,9 +28,7 @@
     modo             =  CREAR;
 
     window.onclick   = cerrarModalAlClickAfuera;
-    refDatos         = firebase.database().ref().child("productos-agroquimicos");
-
-    $('input[type="search"]').val('asd')
+    refDatos         = firebase.database().ref().child("productos-agroquimicos");    
   }
 
   //----------------------- CERRAR MODAL AL CLICK AFUERA --------------------------//
