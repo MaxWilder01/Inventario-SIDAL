@@ -6,22 +6,22 @@
     <title>Inventario</title>
 
     <!-- FONTS -->
-    <!--------------------------------------------------------------------------->
+    
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
     <!-- ICON -->
-    <!--------------------------------------------------------------------------->
+    
 
     <link rel="shortcut icon" type="image/png" href="img/rocket.png">
 
     <!-- JQUERY -->
-    <!--------------------------------------------------------------------------->
+    
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery.dataTables.min.js"></script>
 
     <!-- BOOTSTRAP -->
-    <!--------------------------------------------------------------------------->
+    
 
     <link
       rel="stylesheet"
@@ -42,255 +42,86 @@
     </script>
 
     <!-- FIREBASE -->
-    <!--------------------------------------------------------------------------->
+    
 
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
     <script>
       var config = {
-        apiKey: "AIzaSyCpyqlBvZRhGVLjSPcmy_D7P71LDwxkmVE",
-        authDomain: "inventario-b4de2.firebaseapp.com",
-        databaseURL: "https://inventario-b4de2.firebaseio.com",
-        projectId: "inventario-b4de2",
-        storageBucket: "inventario-b4de2.appspot.com",
-        messagingSenderId: "869466702076"
+        apiKey: "AIzaSyAvolaKsROR11_48LpKiiC2zMB6d-9_nk4",
+        authDomain: "inventario-sidal.firebaseapp.com",
+        databaseURL: "https://inventario-sidal.firebaseio.com",
+        projectId: "inventario-sidal",
+        storageBucket: "inventario-sidal.appspot.com",
+        messagingSenderId: "243640727250"
       };
       firebase.initializeApp(config);
     </script>
 
-    <!-- DATATABLES -->
-    <!--------------------------------------------------------------------------->
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.16/r-2.2.1/datatables.min.css"/>
-
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.16/r-2.2.1/datatables.min.js">
-    </script>
-
-    <!-- JSPDF -->
-    <!--------------------------------------------------------------------------->
-
-    <script src="js/jspdf.min.js"></script>
-
+    
     <!-- LOCAL -->
-    <!--------------------------------------------------------------------------->
-
-    <script src="js/datos.js"></script>
+    
+    <script src="js/login.js"></script>    
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
 
     <!-- ALERTIFY -->
-    <!--------------------------------------------------------------------------->
+   
     <link rel="stylesheet" type="text/css" href="./css/alertify.css">
     <link rel="stylesheet" type="text/css" href="./css/themes/default.css">
-    <script src="js/alertify.js"></script>
-
-    <!-- SCRIPT CONFIGURACIÓN DATATABLES -->
-    <!--------------------------------------------------------------------------->
-
-    <script>
-    $(document).ready(function()
-      {
-        $('#tabla-datos').dataTable( {
-          "columnDefs": [
-            { "orderable": false, "targets": '_all' }
-          ],
-          "bLengthChange": false,
-
-          createdRow: function ( tr ) {
-              $('.editar', tr).on('click', editarDato);
-              $('.borrar', tr).on('click', borrarDato);
-          },
-          createdCell: function () {
-            $('.editar', tr).on('click', editarDato);
-            $('.borrar', tr).on('click', borrarDato);
-          },
-          "language": {
-            "lengthMenu": "Mostrar _MENU_ registros por página",
-            "zeroRecords": "</br>",
-            "info": "Página _PAGE_ de _PAGES_",
-            "infoEmpty": "",
-            "infoFiltered": "",
-            "search":         "",
-            "paginate": {
-              "first":      "Primera",
-              "last":       "Última",
-              "next":       "Siguiente",
-              "previous":   "Anterior"
-            }
-          },
-          "pageLength" : 10
-       });
-
-      var rootRef=firebase.database().ref().child("productos-agroquimicos")
-      var table = $('#tabla-datos').DataTable();
-
-      //------------------------------- AGREGAR ------------------------------//
-
-      rootRef.on("child_added",snap => {
-      var dataSet = [snap.child("nombre").val(),
-                     snap.child("compuesto").val(),
-                     snap.child("formato").val(),
-                     snap.child("presentacion").val(),
-                     snap.child("dosis").val(),
-                     snap.child("control").val(),
-                     snap.child("residualidad").val(),
-                     snap.child("sinergismos").val(),
-                     snap.child("recomendaciones").val(),
-                     '<button id="btn-editar" class="btn btn-warning btn-xs editar" data="'
-                     + snap.key +'"><span class="glyphicon glyphicon-pencil"></span></button>',
-                     '<button class="btn btn-danger btn-xs borrar" data="'
-                     + snap.key +'"><span class="glyphicon glyphicon-trash"></span></button>'];
-
-      table.rows.add([dataSet]).nodes()
-                               .to$()
-                               .addClass(snap.key);
-      table.draw();
-      });
-
-      //------------------------------- EDITAR ------------------------------//
-
-      rootRef.on("child_changed", snap => {
-        document.getElementsByClassName(snap.key)[0].innerHTML =
-         "<tr id='" + snap.key +"'>" +
-            "<td>"+ snap.child("nombre").val() + "</td>"+
-            "<td>" + snap.child("compuesto").val() + "</td>"+
-            "<td>" + snap.child("formato").val() + "</td>"+
-            "<td>" + snap.child("presentacion").val() + "</td>"+
-            "<td>" + snap.child("dosis").val() + "</td>"+
-            "<td>" + snap.child("control").val() + "</td>"+
-            "<td>" + snap.child("residualidad").val() + "</td>"+
-            "<td>" + snap.child("sinergismos").val() + "</td>"+
-            "<td>" + snap.child("recomendaciones").val() + "</td>"+
-            "<td>" +'<button id="btn-editar" class="btn btn-warning btn-xs editar" data="'
-            + snap.key +'"><span class="glyphicon glyphicon-pencil"></span></button>' + "</td>"+
-            "<td>" + '<button class="btn btn-danger btn-xs borrar" data="'
-            + snap.key +'"><span class="glyphicon glyphicon-trash"></span></button>' + "</td>"+
-          "</tr>";
-
-          $(".editar").on("click", editarDato);
-          $(".borrar").on("click", borrarDato);
-      });
-      });
-    </script>
+    <script src="js/alertify.js"></script>    
   </head>
   <body>
-    <div class="container">
-      <nav>
-        <a style="color: white; text-decoration: none" href="index.html">
-          <img src="img/rocket.png" style="width: 30px; height: 30px;" alt="">
-          <div style="width: 5px;"></div>
-          <h2 style="padding-top: 5px;">Inventario SIDAL</h2>
-        </a>
-        <button style="border: none; background: #2E7D32; margin-top: 30px; margin-right: 20px; float: right;" type="button" class="btn btn-success btn-sm" name="button">GENERAR EXCEL</button>
-        <button style="border: none; background: #D50000; margin-top: 30px; margin-right: 20px; float: right;" type="button" class="btn btn-success btn-sm" id="btn-pdf" name="button">GENERAR PDF</button>
-      </nav>
-      <div id="modal" class="modal">
-        <div class="modal-content">
-          <!--<div style="margin: auto;margin-left: -16pt; margin-top: -15pt; width: 600px; height: 30pt; background: #2b3d53; padding-bottom: 5pt; padding-top: 5pt;">
-            <span>
-              <img src="img/rocket.png" style="margin-left: 35px; margin-bottom: 2px; width: 20px; height: 20px;" alt="">
-          </span>
-            <span style="color: white; padding-left: 5pt; padding-top: 20px; font-size: 15pt;">Agregar Producto
-            </span>
-          </div> -->
-          <span style="font-size: 25pt; margin-top: 5px; margin-right: 15px;" class="close">&times;</span>
-          <form style="font-size: 10pt" id="form-datos" autocomplete="off">
-            <div class="form-group col-sm-12">
-              <label for="nombre">Nombre comercial <span style="color: #c53531">*</span></label>
-              <input type="text" name="nombre" value="" id="nombre" class="form-control" autocomplete="off">
-            </div>
-
-            <div class="form-group col-sm-12">
-              <div style="margin:0; padding: 0;" class="col-sm-4">
-                <label for="Compuesto">Compuesto <span style="color: #c53531">*</span></label>
-                <select style="width: 131pt; height:27pt;"name="compuesto" id="compuesto"form="compuesto-form">
-                  <option value="Glifosato">Glifosato</option>
-                  <option value="Glufosinato">Glufosinato</option>
-                </select>
+    <div class="container">    
+      <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                
+        <div class="panel panel-info" >
+          <div class="panel-heading">
+            <div class="panel-title">Iniciar Sesion</div>
+            <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">¿Olvidaste tu contraseña?</a></div>
+          </div>     
+        <div style="padding-top:30px" class="panel-body" >
+                                     
+            <form id="loginform" class="form-horizontal" role="form">                                    
+              <div style="margin-bottom: 25px" class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input id="login-email" type="email" class="form-control" name="email" value="" placeholder="email">
               </div>
 
-              <div style="margin:0; padding: 0;" class="col-sm-4">
-                <label for="formato">Formato <span style="color: #c53531">*</span></label>
-                <select style="width: 131pt; height:27pt;" name="formato" id="formato" form="formato-form">
-                  <option value="Líquido">Líquido</option>
-                  <option value="Compuesto Dispersable">Compuesto Dispersable</option>
-                </select>
+              <div style="margin-bottom: 25px" class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
               </div>
 
-              <div style="margin:0; padding: 0;" class="col-sm-4">
-                <label for="control">Tipo de control <span style="color: #c53531">*</span></label>
-                <select style="width: 131pt; height:27pt;" name="control" id="control" form="control-form">
-                  <option value="Herbicida">Herbicida</option>
-                  <option value="Fungicida">Fungicida</option>
-                  <option value="Pesticida">Pesticida</option>
-                  <option value="Fertilizante foliar">Fertilizante foliar</option>
-                  <option value="Surfactante">Surfactante</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group col-sm-12">
-              <div style="margin:0; padding: 0;" class="col-sm-4">
-                <label for="valor">Presentación (litros) <span style="color: #c53531">*</span></label>
-                <input style="width: 131pt;" type="number" min="0" name="presentacion" value="" id="presentacion" class="form-control" autocomplete="off">
-              </div>
-
-              <div style="margin:0; padding: 0;" class="col-sm-4">
-                <label for="dosis">Dosis Recomendada (l/ha) <span style="color: #c53531">*</span></label>
-                <input style="width: 131pt;" type="number" min="0" name="dosis" value="" id="dosis" class="form-control" step="0.1" autocomplete="off">
-              </div>
-
-              <div style="margin:0; padding: 0;" class="col-sm-4">
-                <label for="residualidad">Residualidad (días) <span style="color: #c53531">*</span></label>
-                <input style="width: 131pt;" type="number" min="0" name="residualidad" value="" id="residualidad" class="form-control" autocomplete="off">
-              </div>
-            </div>
-
-            <div class="form-group col-sm-12">
-              <div style="margin:0; padding: 0;" class="col-sm-12">
-                <label for="sinergismos">Sinergismos</label>
-                <input style=type="text" name="sinergismos" value="" id="sinergismos" class="form-control" autocomplete="off">
-              </div>
-            </div>
-            <div class="form-group col-sm-12">
-              <div style="margin:0; padding: 0;" class="col-sm-12">
-                <label for="recomendaciones">Recomendaciones de seguridad</label>
-                <input type="text" name="recomendaciones" value="" id="recomendaciones" class="form-control" step="0.1" autocomplete="off">
-              </div>
-            </div>
-            <input style="margin-left: 11pt; margin-right: 11pt; width:396pt; "type="submit" name="enviar" value="Agregar" class="btn btn-primary btn-lg" id="btn-enviar">
-          </form>
-        </div>
-      </div>
-      <div class=" col-sm-12 row" id="row">
-        <div class="col-sm-12 card">
-          <h3>Productos Agrícolas</h3>
-          <div class="table-responsive">
-            <table id="tabla-datos" class="table table-hover compact">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Compuesto</th>
-                  <th>Formato</th>
-                  <th>Presentación</th>
-                  <th>Dosis</th>
-                  <th>Tipo de Control</th>
-                  <th>Residualidad</th>
-                  <th>Sinergismos</th>
-                  <th>Recomendaciones</th>
-                  <th></th>
-                  <th>
-                    <button type="button" name="button" class="btn btn-success btn-xs glyphicon glyphicon-plus" id="btn-agregar"></button>
-                  </th>
-                </tr>
-              </thead>
-              <tbody id="tbody-tabla-datos">
-                <div style="display: none; margin-top: 20px" id="preloader">
-                    <div id="loader"></div>
+              <div id="admin-user" style="display: none;">
+                <div style="margin-bottom: 25px;" class="input-group">
+                  <span class="input-group-addon">Ingrese SuperClave:</span>
+                  <input id="input-admin-password" type="text" class="form-control" name="admin-password" placeholder="">
                 </div>
-              </tbody>
-            </table>
-          </div>
+                <div class="col-sm-12 text-center">                  
+                  <a id="btn-adminlogin" onclick="loginAdmin()" class="btn btn-primary">Ingresar como Admin</a>
+                </div>
+              </div>
+              <!-- 
+              <div class="input-group">
+                <div class="checkbox">
+                  <label>
+                    <input id="login-remember" type="checkbox" name="remember" value="1"> Recordar
+                  </label>
+                </div>
+              </div>
+              -->             
 
-        </div>
+              <div id="normal-user" style="margin-top:10px" class="form-group">
+                <div class="col-sm-12 controls text-center">
+                  <a id="btn-login" onclick="login()" class="btn btn-success">Ingresar  </a>
+                  <a id="btn-adminlogin" onclick="mostrarInputAdmin()" class="btn btn-primary">Ingresar como Admin</a>
+                </div>
+              </div> 
+
+              <div id="loader" style="display: none; margin-top:10px" class="col-sm-12 text-center">                
+                <img style="height: 50px; width: auto;" src="img/ico_preload.gif">               
+              </div>              
+            </form> 
+          </div>                     
+        </div>  
       </div>
     </div>
   </body>
