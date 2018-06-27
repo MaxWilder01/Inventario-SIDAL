@@ -28,7 +28,7 @@
     modo             =  CREAR;
 
     window.onclick   = cerrarModalAlClickAfuera;
-    refDatos         = firebase.database().ref().child("productos-agroquimicos");    
+    refDatos         = firebase.database().ref().child("productos-agroquimicos");
   }
 
   //----------------------- CERRAR MODAL AL CLICK AFUERA --------------------------//
@@ -138,6 +138,25 @@
     mostrarModal();
   }
 
+  //--------------------------- AGREGAR ELEMENTO ------------------------------//
+
+  function agregarQuitarElementos() {
+    var keyDatoEditar = this.getAttribute("data");
+    refDatoEditar = refDatos.child(keyDatoEditar);
+
+    var cantidad;
+
+    firebase.database().ref("productos-agroquimicos/" + keyDatoEditar).once('value').then(function(snapshot) {
+       cantidad = (snapshot.val().residualidad);
+       refDatoEditar.update({
+         residualidad   : cantidad + 2
+       },function (error) {
+           alertify.set('notifier','position', 'bottom-right');
+           (error) ? alertify.error("No se pudo editar el producto") : alertify.success("Editado con éxito");
+       });
+    });
+  }
+
   //------------------------------ BORRAR DATO ---------------------------------//
 
   function borrarDato() {
@@ -151,7 +170,7 @@
         alertify.success("Producto eliminado")
     }).catch(function(error) {
         alertify.error("No se pudo eliminar el producto")
-    });;
+    });
 
     var table = $('#tabla-datos').DataTable();
     table
@@ -228,7 +247,7 @@
   function logout() {
 
     firebase.auth().signOut();
-    localStorage.setItem("admin", false);
-    window.location.href = "../index.html";
+    localStorage.setItem("admin", "false");
+    localStorage.setItem("operario", "false");
+    window.location.href = "index.html";
   }
-
