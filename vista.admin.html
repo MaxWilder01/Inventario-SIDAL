@@ -136,8 +136,8 @@
                      snap.child("control").val(),
                      snap.child("residualidad").val(),
                      snap.child("recomendaciones").val(),
-                     '<input style="width: 35pt; height: 16pt" type="number" min="0" value="" id="" class="" autocomplete="off">',
-                     '<select style="width: 60pt; height: 16pt;" name="control" id="">'+
+                     '<input style="width: 35pt; height: 16pt" type="number" min="0" value="" id="'+ snap.key + 'input-agregar" class="" autocomplete="off">',
+                     '<select style="width: 60pt; height: 16pt;" name="control" id="'+ snap.key+ "select-agregar" +'">'+
                        '<option value="Agregar">Agregar</option>' +
                        '<option value="Quitar">Quitar</option>' +
                      '</select>',
@@ -167,8 +167,8 @@
             "<td>" + snap.child("control").val() + "</td>"+
             "<td>" + snap.child("residualidad").val() + "</td>"+
             "<td>" + snap.child("recomendaciones").val() + "</td>"+
-            "<td>" + '<input style="width: 35pt; height: 16pt" type="number" min="0" value="" id="" class="" autocomplete="off">' + "</td>" +
-            "<td>" + '<select style="width: 60pt; height: 16pt;" name="control" id="">'+
+            "<td>" + '<input style="width: 35pt; height: 16pt" type="number" min="0" value="" id="' + snap.key + "input-agregar" + '" class="" autocomplete="off">' + "</td>" +
+            "<td>" + '<select style="width: 60pt; height: 16pt;" name="control" id="'+ snap.key+ "select-agregar" +'">'+
               '<option value="Agregar">Agregar</option>' +
               '<option value="Quitar">Quitar</option>' +
             '</select>' + "</td>" +

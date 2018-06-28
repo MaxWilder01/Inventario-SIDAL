@@ -144,12 +144,16 @@
     var keyDatoEditar = this.getAttribute("data");
     refDatoEditar = refDatos.child(keyDatoEditar);
 
-    var cantidad;
+    var opcion = opcionElegida(keyDatoEditar + "select-agregar");
+    var cantidadModificar = Number((document.getElementById(keyDatoEditar + "input-agregar")).value);
+    var cantidadActual;
 
     firebase.database().ref("productos-agroquimicos/" + keyDatoEditar).once('value').then(function(snapshot) {
-       cantidad = (snapshot.val().residualidad);
+       cantidadActual = Number((snapshot.val().residualidad));
+       var cantidadTotal = (opcion == "Agregar") ?
+       cantidadActual + cantidadModificar : cantidadActual - cantidadModificar;
        refDatoEditar.update({
-         residualidad   : cantidad + 2
+         residualidad   : cantidadTotal
        },function (error) {
            alertify.set('notifier','position', 'bottom-right');
            (error) ? alertify.error("No se pudo editar el producto") : alertify.success("Editado con éxito");
