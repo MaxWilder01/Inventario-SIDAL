@@ -183,11 +183,22 @@
           $(".editar").on("click", editarDato);
           $(".borrar").on("click", borrarDato);
           $(".yes").on("click", agregarQuitarElementos);
+
+          alertify.success("Editado con éxito");
+      });
+
+      rootRef.on("child_removed", snap => {
+        alertify.success("Producto eliminado");
       });
       });
     </script>
   </head>
   <body>
+    <script type="text/javascript">
+      if (localStorage.getItem('admin') == 'false') {
+        window.location.href = "index.html";
+      }
+    </script>
     <div class="container">
       <nav>
         <a style="color: white; text-decoration: none" href="index.html">

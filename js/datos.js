@@ -105,8 +105,7 @@
           presentacion   : datos[4], dosis       : datos[5],
           residualidad   : datos[6], sinergismos : datos[7], recomendaciones: datos[8]
         },function (error) {
-            alertify.set('notifier','position', 'bottom-right');
-            (error) ? alertify.error("No se pudo editar el producto") : alertify.success("Editado con éxito");
+            alertify.error("No se pudo editar el producto");
         });
         modo = CREAR;
       break;
@@ -144,19 +143,24 @@
     var keyDatoEditar = this.getAttribute("data");
     refDatoEditar = refDatos.child(keyDatoEditar);
 
-    var opcion = opcionElegida(keyDatoEditar + "select-agregar");
-    var cantidadModificar = Number((document.getElementById(keyDatoEditar + "input-agregar")).value);
     var cantidadActual;
+    var opcion            = opcionElegida( keyDatoEditar + "select-agregar");
+    var cantidadModificar = Number((document.getElementById(keyDatoEditar + "input-agregar")).value);
 
-    firebase.database().ref("productos-agroquimicos/" + keyDatoEditar).once('value').then(function(snapshot) {
-       cantidadActual = Number((snapshot.val().residualidad));
-       var cantidadTotal = (opcion == "Agregar") ?
-       cantidadActual + cantidadModificar : cantidadActual - cantidadModificar;
+    if (!isNaN(cantidadModificar)) console.log("hola");
+
+    firebase.database()
+            .ref("productos-agroquimicos/" + keyDatoEditar)
+            .once('value')
+            .then(function(snapshot) {
+              cantidadActual = Number((snapshot.val().residualidad));
+              var cantidadTotal = (opcion == "Agregar") ? cantidadActual + cantidadModificar
+                                                        : cantidadActual - cantidadModificar;
+
        refDatoEditar.update({
          residualidad   : cantidadTotal
        },function (error) {
-           alertify.set('notifier','position', 'bottom-right');
-           (error) ? alertify.error("No se pudo editar el producto") : alertify.success("Editado con éxito");
+         if (error)  alertify.error("No se pudo editar el producto");
        });
     });
   }
@@ -170,11 +174,7 @@
     var refDatoBorrar = refDatos.child(keyDatoBorrar);
 
     refDatoBorrar.remove()
-    .then(function() {
-        alertify.success("Producto eliminado")
-    }).catch(function(error) {
-        alertify.error("No se pudo eliminar el producto")
-    });
+
 
     var table = $('#tabla-datos').DataTable();
     table

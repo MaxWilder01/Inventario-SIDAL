@@ -1,5 +1,3 @@
-
-
 firebase.auth().onAuthStateChanged(function(user) {
 
   if (user && localStorage.getItem('admin') == 'true') {
