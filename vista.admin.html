@@ -152,19 +152,21 @@
                                .to$()
                                .addClass(snap.key);
 
-       var elementosEditables = document.getElementsByClassName("editar");
-       for (var i = 0; i < elementosEditables.length; i++) {
-         elementosEditables[i].addEventListener("click", editarDato, false);
-       }
-       var elementosBorrables = document.getElementsByClassName("borrar");
-       for (var i = 0; i < elementosBorrables.length; i++) {
-         elementosBorrables[i].addEventListener("click", borrarDato, false);
-       }
-       var elementosAceptables = document.getElementsByClassName("yes");
-       for (var i = 0; i < elementosAceptables.length; i++) {
-         elementosAceptables[i].addEventListener("click", agregarQuitarElementos, false);
-       }
+
       table.draw();
+
+      var elementosEditables = document.getElementsByClassName("editar");
+      for (var i = 0; i < elementosEditables.length; i++) {
+        elementosEditables[i].addEventListener("click", editarDato, false);
+      }
+      var elementosBorrables = document.getElementsByClassName("borrar");
+      for (var i = 0; i < elementosBorrables.length; i++) {
+        elementosBorrables[i].addEventListener("click", borrarDato, false);
+      }
+      var elementosAceptables = document.getElementsByClassName("yes");
+      for (var i = 0; i < elementosAceptables.length; i++) {
+        elementosAceptables[i].addEventListener("click", agregarQuitarElementos, false);
+      }
       });
 
       //------------------------------- EDITAR ------------------------------//
