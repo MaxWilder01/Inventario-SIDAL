@@ -109,14 +109,7 @@
             alertify.error("No se pudo editar el producto");
           }
         });
-        var elementosEditables = document.getElementsByClassName("editar");
-        for (var i = 0; i < elementosEditables.length; i++) {
-          elementosEditables[i].addEventListener("click", editarDato, false);
-        }
-        var elementosBorrables = document.getElementsByClassName("borrar");
-        for (var i = 0; i < elementosBorrables.length; i++) {
-          elementosBorrables[i].addEventListener("click", borrarDato, false);
-        }
+
         modo = CREAR;
       break;
     }
@@ -154,9 +147,13 @@
     var keyDatoEditar = this.getAttribute("data");
     refDatoEditar = refDatos.child(keyDatoEditar);
 
+    if ((document.getElementById(keyDatoEditar + "input-agregar")).value == "") return;
+
     var cantidadActual;
     var opcion            = opcionElegida( keyDatoEditar + "select-agregar");
     var cantidadModificar = Number((document.getElementById(keyDatoEditar + "input-agregar")).value);
+
+
 
     if (!isNaN(cantidadModificar)) console.log(keyDatoEditar);
 
@@ -174,14 +171,7 @@
          if (error)  alertify.error("No se pudo editar el producto");
        });
     });
-    var elementosEditables = document.getElementsByClassName("editar");
-    for (var i = 0; i < elementosEditables.length; i++) {
-      elementosEditables[i].addEventListener("click", editarDato, false);
-    }
-    var elementosBorrables = document.getElementsByClassName("borrar");
-    for (var i = 0; i < elementosBorrables.length; i++) {
-      elementosBorrables[i].addEventListener("click", borrarDato, false);
-    }
+
   }
 
   //------------------------------ BORRAR DATO ---------------------------------//

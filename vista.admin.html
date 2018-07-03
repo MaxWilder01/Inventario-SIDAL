@@ -95,7 +95,7 @@
           "bLengthChange": false,
           "order": [[ 1, "desc" ]],
 
-          createdRow: function ( tr ) {
+          /*createdRow: function ( tr ) {
               $('.editar', tr).on('click', editarDato);
               $('.borrar', tr).on('click', borrarDato);
               $('.yes', tr).on('click', agregarQuitarElementos);
@@ -104,7 +104,7 @@
             $('.editar', tr).on('click', editarDato);
             $('.borrar', tr).on('click', borrarDato);
             $('.yes', tr).on('click', agregarQuitarElementos);
-          },
+          },*/
           "language": {
             "lengthMenu": "Mostrar _MENU_ registros por página",
             "zeroRecords": "</br>",
@@ -151,6 +151,19 @@
       table.rows.add([dataSet]).nodes()
                                .to$()
                                .addClass(snap.key);
+
+       var elementosEditables = document.getElementsByClassName("editar");
+       for (var i = 0; i < elementosEditables.length; i++) {
+         elementosEditables[i].addEventListener("click", editarDato, false);
+       }
+       var elementosBorrables = document.getElementsByClassName("borrar");
+       for (var i = 0; i < elementosBorrables.length; i++) {
+         elementosBorrables[i].addEventListener("click", borrarDato, false);
+       }
+       var elementosAceptables = document.getElementsByClassName("yes");
+       for (var i = 0; i < elementosAceptables.length; i++) {
+         elementosAceptables[i].addEventListener("click", agregarQuitarElementos, false);
+       }
       table.draw();
       });
 
@@ -184,6 +197,18 @@
           $(".borrar").on("click", borrarDato);
           $(".yes").on("click", agregarQuitarElementos);*/
 
+          var elementosEditables = document.getElementsByClassName("editar");
+          for (var i = 0; i < elementosEditables.length; i++) {
+            elementosEditables[i].addEventListener("click", editarDato, false);
+          }
+          var elementosBorrables = document.getElementsByClassName("borrar");
+          for (var i = 0; i < elementosBorrables.length; i++) {
+            elementosBorrables[i].addEventListener("click", borrarDato, false);
+          }
+          var elementosAceptables = document.getElementsByClassName("yes");
+          for (var i = 0; i < elementosAceptables.length; i++) {
+            elementosAceptables[i].addEventListener("click", agregarQuitarElementos, false);
+          }
           alertify.success("Editado con éxito");
       });
 
