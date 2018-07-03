@@ -105,8 +105,18 @@
           presentacion   : datos[4], dosis       : datos[5],
           residualidad   : datos[6], sinergismos : datos[7], recomendaciones: datos[8]
         },function (error) {
+          if (error) {
             alertify.error("No se pudo editar el producto");
+          }
         });
+        var elementosEditables = document.getElementsByClassName("editar");
+        for (var i = 0; i < elementosEditables.length; i++) {
+          elementosEditables[i].addEventListener("click", editarDato, false);
+        }
+        var elementosBorrables = document.getElementsByClassName("borrar");
+        for (var i = 0; i < elementosBorrables.length; i++) {
+          elementosBorrables[i].addEventListener("click", borrarDato, false);
+        }
         modo = CREAR;
       break;
     }
@@ -119,6 +129,7 @@
   function editarDato() {
     var keyDatoEditar = this.getAttribute("data");
     refDatoEditar = refDatos.child(keyDatoEditar);
+    console.log(keyDatoEditar);
 
     refDatoEditar.once("value", function (snap) {
       var datos = snap.val();
@@ -147,7 +158,7 @@
     var opcion            = opcionElegida( keyDatoEditar + "select-agregar");
     var cantidadModificar = Number((document.getElementById(keyDatoEditar + "input-agregar")).value);
 
-    if (!isNaN(cantidadModificar)) console.log("hola");
+    if (!isNaN(cantidadModificar)) console.log(keyDatoEditar);
 
     firebase.database()
             .ref("productos-agroquimicos/" + keyDatoEditar)
@@ -159,10 +170,18 @@
 
        refDatoEditar.update({
          residualidad   : cantidadTotal
-       },function (error) {
+       } ,function (error) {
          if (error)  alertify.error("No se pudo editar el producto");
        });
     });
+    var elementosEditables = document.getElementsByClassName("editar");
+    for (var i = 0; i < elementosEditables.length; i++) {
+      elementosEditables[i].addEventListener("click", editarDato, false);
+    }
+    var elementosBorrables = document.getElementsByClassName("borrar");
+    for (var i = 0; i < elementosBorrables.length; i++) {
+      elementosBorrables[i].addEventListener("click", borrarDato, false);
+    }
   }
 
   //------------------------------ BORRAR DATO ---------------------------------//
@@ -173,8 +192,9 @@
     var keyDatoBorrar = this.getAttribute("data");
     var refDatoBorrar = refDatos.child(keyDatoBorrar);
 
-    refDatoBorrar.remove()
+    console.log(keyDatoBorrar)
 
+    refDatoBorrar.remove()
 
     var table = $('#tabla-datos').DataTable();
     table

@@ -180,9 +180,9 @@
             + snap.key +'"><span class="glyphicon glyphicon-trash"></span></button>' + "</td>"+
           "</tr>";
 
-          $(".editar").on("click", editarDato);
+          /*$(".editar").on("click", editarDato);
           $(".borrar").on("click", borrarDato);
-          $(".yes").on("click", agregarQuitarElementos);
+          $(".yes").on("click", agregarQuitarElementos);*/
 
           alertify.success("Editado con éxito");
       });
@@ -196,7 +196,7 @@
   <body>
     <script type="text/javascript">
       if (localStorage.getItem('admin') == 'false') {
-        window.location.href = "index.html";
+        window.location.href = "login.html";
       }
     </script>
     <div class="container">
