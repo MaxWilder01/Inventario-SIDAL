@@ -1,13 +1,13 @@
 firebase.auth().onAuthStateChanged(function(user) {
 
-  if (user && localStorage.getItem('admin') == 'true') {
-    window.location.href = "vista.admin.html";
-
-  } else if (user && (localStorage.getItem('admin') == 'false' || localStorage.getItem('admin') == null)) {
-    window.location.href = "vista.operario.html";
-
-  }
+  if (user) {
+    window.location.href = "agroquimicos.html";
+  }   
 });
+
+if (localStorage.getItem('admin') == 'true' || localStorage.getItem('operario') == 'true') {
+    window.location.href = "agroquimicos.html";
+}
 
 function login() {
 

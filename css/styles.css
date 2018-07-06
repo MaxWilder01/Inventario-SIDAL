@@ -1,10 +1,8 @@
 body {
-  font-family: 'Roboto', sans-serif;
-  padding: 0;
-  margin-top: -20px;
+  font-family: 'Roboto', sans-serif;   
   background: #eeeded;
 }
-
+/*
 nav {
   background: #2b3d53;
   width: 100%;
@@ -31,6 +29,7 @@ nav img {
 nav div {
   display: inline-block;
 }
+*/
 .card {
   padding-top: 5px;
   padding-bottom: 5px;
