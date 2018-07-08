@@ -1,7 +1,9 @@
 body {
-  font-family: 'Roboto', sans-serif;   
+  font-family: 'Roboto', sans-serif;
   background: #eeeded;
+  overflow-y: hidden;
 }
+
 /*
 nav {
   background: #2b3d53;
@@ -219,6 +221,11 @@ td:nth-child(12), td:nth-child(13) {
   font-weight: lighter;
   font-size: 11sp;
 }
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+ }
 
 #tabla-datos {
   border-bottom: 1px solid gray;
