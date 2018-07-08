@@ -94,7 +94,20 @@
           ],
           "bLengthChange": false,
           "order": [[ 1, "desc" ]],
-
+          "drawCallback": function( settings ) {
+            var elementosEditables = document.getElementsByClassName("editar");
+            for (var i = 0; i < elementosEditables.length; i++) {
+              elementosEditables[i].addEventListener("click", editarDato, false);
+            }
+            var elementosBorrables = document.getElementsByClassName("borrar");
+            for (var i = 0; i < elementosBorrables.length; i++) {
+              elementosBorrables[i].addEventListener("click", borrarDato, false);
+            }
+            var elementosAceptables = document.getElementsByClassName("yes");
+            for (var i = 0; i < elementosAceptables.length; i++) {
+              elementosAceptables[i].addEventListener("click", agregarQuitarElementos, false);
+            }
+          },
           /*createdRow: function ( tr ) {
               $('.editar', tr).on('click', editarDato);
               $('.borrar', tr).on('click', borrarDato);
@@ -134,7 +147,7 @@
                      snap.child("presentacion").val(),
                      snap.child("dosis").val(),
                      snap.child("control").val(),
-                     snap.child("residualidad").val(),
+                     snap.child("cantidad").val(),
                      snap.child("recomendaciones").val(),
                      '<input style="width: 35pt; height: 16pt" type="number" min="0" value="" id="'+ snap.key + 'input-agregar" class="" autocomplete="off">',
                      '<select style="width: 60pt; height: 16pt;" name="control" id="'+ snap.key+ "select-agregar" +'">'+
@@ -155,18 +168,7 @@
 
       table.draw();
 
-      var elementosEditables = document.getElementsByClassName("editar");
-      for (var i = 0; i < elementosEditables.length; i++) {
-        elementosEditables[i].addEventListener("click", editarDato, false);
-      }
-      var elementosBorrables = document.getElementsByClassName("borrar");
-      for (var i = 0; i < elementosBorrables.length; i++) {
-        elementosBorrables[i].addEventListener("click", borrarDato, false);
-      }
-      var elementosAceptables = document.getElementsByClassName("yes");
-      for (var i = 0; i < elementosAceptables.length; i++) {
-        elementosAceptables[i].addEventListener("click", agregarQuitarElementos, false);
-      }
+
       });
 
       //------------------------------- EDITAR ------------------------------//
@@ -180,7 +182,7 @@
             "<td>" + snap.child("presentacion").val() + "</td>"+
             "<td>" + snap.child("dosis").val() + "</td>"+
             "<td>" + snap.child("control").val() + "</td>"+
-            "<td>" + snap.child("residualidad").val() + "</td>"+
+            "<td>" + snap.child("cantidad").val() + "</td>"+
             "<td>" + snap.child("recomendaciones").val() + "</td>"+
             "<td>" + '<input style="width: 35pt; height: 16pt" type="number" min="0" value="" id="' + snap.key + "input-agregar" + '" class="" autocomplete="off">' + "</td>" +
             "<td>" + '<select style="width: 60pt; height: 16pt;" name="control" id="'+ snap.key+ "select-agregar" +'">'+
@@ -199,7 +201,7 @@
           $(".borrar").on("click", borrarDato);
           $(".yes").on("click", agregarQuitarElementos);*/
 
-          var elementosEditables = document.getElementsByClassName("editar");
+          /*var elementosEditables = document.getElementsByClassName("editar");
           for (var i = 0; i < elementosEditables.length; i++) {
             elementosEditables[i].addEventListener("click", editarDato, false);
           }
@@ -210,7 +212,7 @@
           var elementosAceptables = document.getElementsByClassName("yes");
           for (var i = 0; i < elementosAceptables.length; i++) {
             elementosAceptables[i].addEventListener("click", agregarQuitarElementos, false);
-          }
+          }*/
           alertify.success("Editado con éxito");
       });
 
@@ -221,24 +223,25 @@
     </script>
   </head>
   <body>
-    <nav class="navbar navbar-inverse">
+    <nav style="border-radius: 0px; background: #2b3d53; border: none;" class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header inline-block">
-          <a class="navbar-brand" href="index.html">
-            <img src="img/logo.png" class="img-responsive" width="40%" height="auto">
+          <a style="display: inline; width:198pt; height:35pt; display: inline;" class="navbar-brand" href="index.html">
+            <h3 style="display: inline; color: white;">Inventario</h3>
+            <img style="display: inline; margin-top: -4pt; width:76pt; height:25pt" src="img/logo2.png" class="img-responsive">
           </a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="agroquimicos.html">Agroquimicos</a></li>
-            <li><a href="">Animales</a></li>  
-            <li><a href="calculadora.html">Calculadora</a></li>            
+            <li><a style="color: white" href="agroquimicos.html">Agroquimicos</a></li>
+            <li><a style="color: white" href="">Animales</a></li>
+            <li><a style="color: white" href="calculadora.html">Calculadora</a></li>
             <button type="button" id="btn-usuarios" style="display: none;" class="btn btn-success btn-sm navbar-btn" name="button" onclick="location.href = 'https://console.firebase.google.com/u/0/project/inventario-sidal/authentication/users';">GESTIONAR USUARIOS</button>
             <button type="button" class="btn btn-info btn-sm navbar-btn" name="button" onclick="logout()">CERRAR SESION</button>
           </ul>
-        
+
       </nav>
-    <div class="container">      
+    <div class="container">
       <div id="modal" class="modal">
         <div class="modal-content">
           <!--<div style="margin: auto;margin-left: -16pt; margin-top: -15pt; width: 600px; height: 30pt; background: #2b3d53; padding-bottom: 5pt; padding-top: 5pt;">
@@ -285,27 +288,18 @@
             </div>
 
             <div class="form-group col-sm-12">
-              <div style="margin:0; padding: 0;" class="col-sm-4">
+              <div style="margin:0; padding: 0;" class="col-sm-6">
                 <label for="valor">Presentación (litros) <span style="color: #c53531">*</span></label>
-                <input style="width: 131pt;" type="number" min="0" name="presentacion" value="" id="presentacion" class="form-control" autocomplete="off">
+                <input style="width: 197pt;" type="number" min="0" name="presentacion" value="" id="presentacion" class="form-control" autocomplete="off">
               </div>
 
-              <div style="margin:0; padding: 0;" class="col-sm-4">
+              <div style="margin:0; padding: 0;" class="col-sm-6">
                 <label for="dosis">Dosis Recomendada (l/ha) <span style="color: #c53531">*</span></label>
-                <input style="width: 131pt;" type="number" min="0" name="dosis" value="" id="dosis" class="form-control" step="0.1" autocomplete="off">
-              </div>
-
-              <div style="margin:0; padding: 0;" class="col-sm-4">
-                <label for="residualidad">Residualidad (días) <span style="color: #c53531">*</span></label>
-                <input style="width: 131pt;" type="number" min="0" name="residualidad" value="" id="residualidad" class="form-control" autocomplete="off">
+                <input style="width: 198pt;" type="number" min="0" name="dosis" value="" id="dosis" class="form-control" step="0.1" autocomplete="off">
               </div>
             </div>
 
             <div class="form-group col-sm-12">
-              <div style="margin:0; padding: 0;" class="col-sm-12">
-                <label for="sinergismos">Sinergismos</label>
-                <input style=type="text" name="sinergismos" value="" id="sinergismos" class="form-control" autocomplete="off">
-              </div>
             </div>
             <div class="form-group col-sm-12">
               <div style="margin:0; padding: 0;" class="col-sm-12">

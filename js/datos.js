@@ -36,6 +36,8 @@
 
     window.onclick   = cerrarModalAlClickAfuera;
     refDatos         = firebase.database().ref().child("productos-agroquimicos");
+
+    //generarProductos(18);
   }
 
   //----------------------- CERRAR MODAL AL CLICK AFUERA --------------------------//
@@ -80,9 +82,7 @@
     datos[3]  = opcionElegida('control');
     datos[4]  = event.target.presentacion.value;
     datos[5]  = event.target.dosis.value;
-    datos[6]  = event.target.residualidad.value;
-    datos[7]  = event.target.sinergismos.value;
-    datos[8]  = event.target.recomendaciones.value;
+    datos[6]  = event.target.recomendaciones.value;
 
     if (modo == CREAR && validarCamposObligatorios(datos) == false) {
       alertify.set('notifier','position', 'top-center');
@@ -96,7 +96,7 @@
           nombre         : datos[0], compuesto   : datos[1],
           formato        : datos[2], control     : datos[3],
           presentacion   : datos[4], dosis       : datos[5],
-          residualidad   : datos[6], sinergismos : datos[7], recomendaciones: datos[8]
+          recomendaciones: datos[6], cantidad    : 0
         } ,function (error) {
             alertify.set('notifier','position', 'bottom-right');
             (error) ? alertify.error("No se pudo agregar el producto") : alertify.success("Agregado con éxito");
@@ -110,12 +110,25 @@
           nombre         : datos[0], compuesto   : datos[1],
           formato        : datos[2], control     : datos[3],
           presentacion   : datos[4], dosis       : datos[5],
-          residualidad   : datos[6], sinergismos : datos[7], recomendaciones: datos[8]
+          recomendaciones: datos[6]
         },function (error) {
           if (error) {
             alertify.error("No se pudo editar el producto");
           }
         });
+
+        var elementosEditables = document.getElementsByClassName("editar");
+        for (var i = 0; i < elementosEditables.length; i++) {
+          elementosEditables[i].addEventListener("click", editarDato, false);
+        }
+        var elementosBorrables = document.getElementsByClassName("borrar");
+        for (var i = 0; i < elementosBorrables.length; i++) {
+          elementosBorrables[i].addEventListener("click", borrarDato, false);
+        }
+        var elementosAceptables = document.getElementsByClassName("yes");
+        for (var i = 0; i < elementosAceptables.length; i++) {
+          elementosAceptables[i].addEventListener("click", agregarQuitarElementos, false);
+        }
 
         modo = CREAR;
       break;
@@ -139,8 +152,6 @@
       document.getElementById("presentacion").value     = datos.presentacion;
       document.getElementById("dosis").value            = datos.dosis;
       document.getElementById("control").value          = datos.control;
-      document.getElementById("residualidad").value     = datos.residualidad;
-      document.getElementById("sinergismos").value      = datos.sinergismos;
       document.getElementById("recomendaciones").value  = datos.recomendaciones;
     });
 
@@ -168,15 +179,28 @@
             .ref("productos-agroquimicos/" + keyDatoEditar)
             .once('value')
             .then(function(snapshot) {
-              cantidadActual = Number((snapshot.val().residualidad));
+              cantidadActual = Number((snapshot.val().cantidad));
               var cantidadTotal = (opcion == "Agregar") ? cantidadActual + cantidadModificar
                                                         : cantidadActual - cantidadModificar;
 
        refDatoEditar.update({
-         residualidad   : cantidadTotal
+         cantidad   : cantidadTotal
        } ,function (error) {
          if (error)  alertify.error("No se pudo editar el producto");
        });
+
+       var elementosEditables = document.getElementsByClassName("editar");
+       for (var i = 0; i < elementosEditables.length; i++) {
+         elementosEditables[i].addEventListener("click", editarDato, false);
+       }
+       var elementosBorrables = document.getElementsByClassName("borrar");
+       for (var i = 0; i < elementosBorrables.length; i++) {
+         elementosBorrables[i].addEventListener("click", borrarDato, false);
+       }
+       var elementosAceptables = document.getElementsByClassName("yes");
+       for (var i = 0; i < elementosAceptables.length; i++) {
+         elementosAceptables[i].addEventListener("click", agregarQuitarElementos, false);
+       }
     });
 
   }
@@ -245,12 +269,13 @@
       var compuesto = (Math.floor((Math.random() * 2) + 1) == 1) ? "Glifosato" : "Glufosinato";
       var control   = (Math.floor((Math.random() * 2) + 1) == 1) ? "Herbicida" : "Fertilizante foliar";
       var formato   = (Math.floor((Math.random() * 2) + 1) == 1) ? "Líquido" : "Compuesto Dispersable";
+      var cantidad  = Math.floor((Math.random() * 10) + 1);
       var nombre    = nombresProductos[i];
 
       refDatos.push({
-        nombre       : nombre   , compuesto    : compuesto , formato         : formato   ,
-        control      : control  , presentacion : i + 3     , dosis           : i + 0.1   ,
-        residualidad : i + 2    , sinergismos  : "Líquido" , recomendaciones : (i + 1) + " litros"
+        nombre          : nombre             , compuesto    : compuesto , formato : formato   ,
+        control         : control            , presentacion : i + 3     , dosis   : i + 0.1   ,
+        recomendaciones : (i + 1) + " litros", cantidad     : cantidad
       });
     }
   }
