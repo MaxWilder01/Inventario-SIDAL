@@ -9,6 +9,7 @@ if (localStorage.getItem('admin') == 'true' || localStorage.getItem('operario') 
     window.location.href = "agroquimicos.html";
 }
 
+
 function login() {
 
 	var userEmail = document.getElementById("login-email").value;

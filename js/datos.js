@@ -1,5 +1,13 @@
   //------------------------------- WINDOW ON LOAD ----------------------------------//
 
+  
+  if (localStorage.getItem('admin') == null && localStorage.getItem('operario') == null) {
+    window.location.href = "index.html";
+  }
+  if (localStorage.getItem('admin') == 'false' && localStorage.getItem('operario') == 'false') {
+    window.location.href = "index.html";
+  }
+
   window.onload = inicializar;
 
   //-------------------------------- VARIABLES -------------------------------------//
@@ -10,12 +18,10 @@
   //------------------------------- INICIALIZAR -----------------------------------//
 
   function inicializar() {
-    if (localStorage.getItem('admin') == 'false' && localStorage.getItem('operario') == 'false') {
-      window.location.href = "index.html";
-    }
+    
     if (localStorage.getItem('admin') == 'true') {
       document.getElementById('btn-usuarios').style.display= "inline";
-    }
+    }    
 
     modal            = document.getElementById('modal');
     formDatos        = document.getElementById("form-datos");

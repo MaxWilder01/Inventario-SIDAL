@@ -1,14 +1,32 @@
+//------------------------------- WINDOW ON LOAD ----------------------------------//
+
+if (localStorage.getItem('admin') == null && localStorage.getItem('operario') == null) {
+    window.location.href = "index.html";
+}
 if (localStorage.getItem('admin') == 'false' && localStorage.getItem('operario') == 'false') {
     window.location.href = "index.html";
-} 
-
-if (localStorage.getItem('admin') == 'true') {
-    document.getElementById('btn-usuarios').style.display= "inline";
 }
 
-var botonCerrarSesion = document.getElementById("btn-cerrarSesion");
-botonCerrarSesion.addEventListener("click" , logout, false);
+window.onload = inicializar;
 
+//-------------------------------- VARIABLES -------------------------------------//
+
+var botonCerrarSesion;
+
+//------------------------------- INICIALIZAR -----------------------------------//
+
+function inicializar() {
+  
+  if (localStorage.getItem('admin') == 'true') {
+    document.getElementById('btn-usuarios').style.display= "inline";
+  }
+
+  botonCerrarSesion = document.getElementById("btn-cerrarSesion");    
+  botonCerrarSesion.addEventListener("click" , logout, false);
+    
+}
+
+//----------------------------- CALCULAR ------------------------------//
 function calcular() {
 	var dosis = document.getElementById("dosis").value;
 	var area = document.getElementById('area').value;
