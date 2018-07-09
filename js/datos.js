@@ -5,7 +5,7 @@
   //-------------------------------- VARIABLES -------------------------------------//
 
   var formDatos, refDatos, tBodyTablaDatos, modal, botonCerrarModal,
-      botonAgregar, botonSubmit, CREAR, ACTUALIZAR, modo, botonPDF;
+      botonAgregar, botonSubmit, CREAR, ACTUALIZAR, modo, botonPDF, botonCerrarSesion;
 
   //------------------------------- INICIALIZAR -----------------------------------//
 
@@ -23,11 +23,13 @@
     botonAgregar     = document.getElementById("btn-agregar");
     botonSubmit      = document.getElementById("btn-enviar");
     botonPDF         = document.getElementById("btn-pdf");
+    botonCerrarSesion = document.getElementById("btn-cerrarSesion");
     botonCerrarModal = document.getElementsByClassName("close")[0];
 
     formDatos        .addEventListener("submit", enviarDatosFirebase, false);
     botonCerrarModal .addEventListener("click" , cerrarModal        , false);
     botonAgregar     .addEventListener("click" , mostrarModal       , false);
+    botonCerrarSesion.addEventListener("click" , logout             , false);
     //botonPDF         .addEventListener("click" , generarPDF         , false);
 
     CREAR            = "CREAR";
