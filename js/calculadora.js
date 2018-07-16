@@ -1,13 +1,17 @@
-if (localStorage.getItem('admin') == 'false' && localStorage.getItem('operario') == 'false') {
-    window.location.href = "index.html";
-} 
+window.onload = inicializar;
 
-if (localStorage.getItem('admin') == 'true') {
-    document.getElementById('btn-usuarios').style.display= "inline";
+function inicializar() {
+  if (localStorage.getItem('admin') == 'false' && localStorage.getItem('operario') == 'false') {
+      window.location.href = "index.html";
+  }
+
+  if (localStorage.getItem('admin') == 'true') {
+      document.getElementById('btn-usuarios').style.display= "inline";
+  }
+
+  var botonCerrarSesion = document.getElementById("btn-cerrarSesion");
+  botonCerrarSesion.addEventListener("click" , logout, false);
 }
-
-var botonCerrarSesion = document.getElementById("btn-cerrarSesion");
-botonCerrarSesion.addEventListener("click" , logout, false);
 
 function calcular() {
 	var dosis = document.getElementById("dosis").value;
