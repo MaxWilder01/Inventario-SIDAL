@@ -2,12 +2,16 @@
 
   
   if (localStorage.getItem('admin') == null && localStorage.getItem('operario') == null) {
+
     window.location.href = "index.html";
   }
+    
+  
   if (localStorage.getItem('admin') == 'false' && localStorage.getItem('operario') == 'false') {
     window.location.href = "index.html";
   }
-
+  
+  
   window.onload = inicializar;
 
   //-------------------------------- VARIABLES -------------------------------------//
@@ -177,20 +181,24 @@
 
     var cantidadActual;
     var opcion            = opcionElegida( keyDatoEditar + "select-agregar");
-    var cantidadModificar = Number((document.getElementById(keyDatoEditar + "input-agregar")).value);
-
-
-
-    if (!isNaN(cantidadModificar)) console.log(keyDatoEditar);
+    var cantidadModificar = Number((document.getElementById(keyDatoEditar + "input-agregar")).value);    
 
     firebase.database()
             .ref("productos-agroquimicos/" + keyDatoEditar)
             .once('value')
             .then(function(snapshot) {
               cantidadActual = Number((snapshot.val().cantidad));
+              if (isNaN(cantidadActual)) {
+                cantidadActual = 0;
+              }
+              if (cantidadModificar > cantidadActual && opcion == "Quitar") {
+                alertify.error("No se puede quitar más de " + cantidadActual + " elementos");
+              } else {
               var cantidadTotal = (opcion == "Agregar") ? cantidadActual + cantidadModificar
-                                                        : cantidadActual - cantidadModificar;
-
+                                                        : cantidadActual - cantidadModificar;                                                        
+       if (cantidadTotal == 0) {
+        cantidadTotal = "SIN STOCK";        
+       }
        refDatoEditar.update({
          cantidad   : cantidadTotal
        } ,function (error) {
@@ -209,7 +217,7 @@
        for (var i = 0; i < elementosAceptables.length; i++) {
          elementosAceptables[i].addEventListener("click", agregarQuitarElementos, false);
        }
-    });
+    }});
 
   }
 
