@@ -73,7 +73,7 @@
     <!-- LOCAL -->
 
 
-    <script src="js/datos.js"></script>
+    <script src="js/animales.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
 
     <!-- ALERTIFY -->
@@ -136,20 +136,16 @@
           "pageLength" : 10
        });
 
-      var rootRef=firebase.database().ref().child("productos-agroquimicos")
+      var rootRef=firebase.database().ref().child("animales")
       var table = $('#tabla-datos').DataTable();
 
       //------------------------------- AGREGAR ------------------------------//
 
       rootRef.on("child_added",snap => {
       var dataSet = [snap.child("nombre").val(),
-                     snap.child("compuesto").val(),
-                     snap.child("formato").val(),
-                     snap.child("presentacion").val(),
-                     snap.child("dosis").val(),
-                     snap.child("control").val(),
-                     snap.child("cantidad").val(),
-                     snap.child("recomendaciones").val(),
+                     snap.child("comida").val(),
+                     snap.child("proteina").val(),
+                     snap.child("cantidad").val(),                     
                      '<input style="width: 35pt; height: 16pt" type="number" min="0" value="" id="'+ snap.key + 'input-agregar" class="" autocomplete="off">',
                      '<select style="width: 60pt; height: 16pt;" name="control" id="'+ snap.key+ "select-agregar" +'">'+
                        '<option value="Agregar">Agregar</option>' +
@@ -178,13 +174,9 @@
         document.getElementsByClassName(snap.key)[0].innerHTML =
          "<tr id='" + snap.key +"'>" +
             "<td>"+ snap.child("nombre").val() + "</td>"+
-            "<td>" + snap.child("compuesto").val() + "</td>"+
-            "<td>" + snap.child("formato").val() + "</td>"+
-            "<td>" + snap.child("presentacion").val() + "</td>"+
-            "<td>" + snap.child("dosis").val() + "</td>"+
-            "<td>" + snap.child("control").val() + "</td>"+
-            "<td>" + snap.child("cantidad").val() + "</td>"+
-            "<td>" + snap.child("recomendaciones").val() + "</td>"+
+            "<td>" + snap.child("comida").val() + "</td>"+
+            "<td>" + snap.child("proteina").val() + "</td>"+
+            "<td>" + snap.child("cantidad").val() + "</td>"+            
             "<td>" + '<input style="width: 35pt; height: 16pt" type="number" min="0" value="" id="' + snap.key + "input-agregar" + '" class="" autocomplete="off">' + "</td>" +
             "<td>" + '<select style="width: 60pt; height: 16pt;" name="control" id="'+ snap.key+ "select-agregar" +'">'+
               '<option value="Agregar">Agregar</option>' +
@@ -218,7 +210,7 @@
       });
 
       rootRef.on("child_removed", snap => {
-        alertify.success("Producto eliminado");
+        alertify.success("Animal eliminado");
       });
       });
     </script>
@@ -265,79 +257,40 @@
           <span style="font-size: 25pt; margin-top: 5px; margin-right: 15px;" class="close">&times;</span>
           <form style="font-size: 10pt" id="form-datos" autocomplete="off">
             <div class="form-group col-sm-12">
-              <label for="nombre">Nombre comercial <span style="color: #c53531">*</span></label>
+              <label for="nombre">Nombre<span style="color: #c53531">*</span></label>
               <input type="text" name="nombre" value="" id="nombre" class="form-control" autocomplete="off">
             </div>
 
             <div class="form-group col-sm-12">
-              <div style="margin:0; padding: 0;" class="col-sm-4">
-                <label for="Compuesto">Compuesto <span style="color: #c53531">*</span></label>
-                <select style="width: 131pt; height:27pt;"name="compuesto" id="compuesto"form="compuesto-form">
-                  <option value="Glifosato">Glifosato</option>
-                  <option value="Glufosinato">Glufosinato</option>
-                </select>
-              </div>
-
-              <div style="margin:0; padding: 0;" class="col-sm-4">
-                <label for="formato">Formato <span style="color: #c53531">*</span></label>
-                <select style="width: 131pt; height:27pt;" name="formato" id="formato" form="formato-form">
-                  <option value="Líquido">Líquido</option>
-                  <option value="Compuesto Dispersable">Compuesto Dispersable</option>
-                </select>
-              </div>
-
-              <div style="margin:0; padding: 0;" class="col-sm-4">
-                <label for="control">Tipo de control <span style="color: #c53531">*</span></label>
-                <select style="width: 131pt; height:27pt;" name="control" id="control" form="control-form">
-                  <option value="Herbicida">Herbicida</option>
-                  <option value="Fungicida">Fungicida</option>
-                  <option value="Pesticida">Pesticida</option>
-                  <option value="Fertilizante foliar">Fertilizante foliar</option>
-                  <option value="Surfactante">Surfactante</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group col-sm-12">
               <div style="margin:0; padding: 0;" class="col-sm-6">
-                <label for="valor">Presentación (litros) <span style="color: #c53531">*</span></label>
-                <input style="width: 197pt;" type="number" min="0" name="presentacion" value="" id="presentacion" class="form-control" autocomplete="off">
+                <label for="comida">Comida diaria (Kg) <span style="color: #c53531">*</span></label>
+                <input style="width: 197pt;" type="number" min="0" name="comida" value="" id="comida" class="form-control" autocomplete="off">
               </div>
+            </div>
 
+            <div class="form-group col-sm-12">              
               <div style="margin:0; padding: 0;" class="col-sm-6">
-                <label for="dosis">Dosis Recomendada (l/ha) <span style="color: #c53531">*</span></label>
-                <input style="width: 198pt;" type="number" min="0" name="dosis" value="" id="dosis" class="form-control" step="0.1" autocomplete="off">
+                <label for="proteina">Cantidad de proteina <span style="color: #c53531">*</span></label>
+                <input style="width: 198pt;" type="number" min="0" name="proteina" value="" id="proteina" class="form-control" step="0.1" autocomplete="off">
               </div>
             </div>
-
-            <div class="form-group col-sm-12">
-            </div>
-            <div class="form-group col-sm-12">
-              <div style="margin:0; padding: 0;" class="col-sm-12">
-                <label for="recomendaciones">Recomendaciones de seguridad</label>
-                <input type="text" name="recomendaciones" value="" id="recomendaciones" class="form-control" step="0.1" autocomplete="off">
-              </div>
-            </div>
-            <input style="margin-left: 11pt; margin-right: 11pt; width:396pt; "type="submit" name="enviar" value="Agregar" class="btn btn-primary btn-lg" id="btn-enviar">
+            
+            <input style="margin-left: 11pt; margin-right: 11pt; width:396pt; " type="submit" name="enviar" value="Agregar" class="btn btn-primary btn-lg" id="btn-enviar">
           </form>
         </div>
       </div>
       <div class=" col-sm-12 row" id="row">
         <div class="col-sm-12 card">
-          <h3>Productos Agrícolas</h3>
+          <h3>Animales</h3>
           <div class="table-responsive">
             <table id="tabla-datos" class="table table-hover compact">
               <thead>
                 <tr>
                   <th>Nombre</th>
-                  <th>Compuesto</th>
-                  <th>Formato</th>
-                  <th>Presentación</th>
-                  <th>Dosis</th>
-                  <th>Tipo de Control</th>
+                  <th>Comida diaria</th>
+                  <th>Cantidad de proteina</th>                  
                   <th>Cantidad</th>
 
-                  <th>Recomendaciones</th>
                   <th style="width: 45pt"></th>
                   <th style="width: 65pt"></th>
                   <th></th>
