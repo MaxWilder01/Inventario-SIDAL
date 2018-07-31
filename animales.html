@@ -73,7 +73,11 @@
     <!-- LOCAL -->
 
 
+<<<<<<< HEAD
     <script src="js/datos.js"></script>
+=======
+    <script src="js/animales.js"></script>
+>>>>>>> 78f23bdd9e282b5cbfdf8bd6b2b9a66155d12d3c
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
 
     <!-- ALERTIFY -->
@@ -136,13 +140,18 @@
           "pageLength" : 10
        });
 
+<<<<<<< HEAD
       var rootRef=firebase.database().ref().child("productos-agroquimicos")
+=======
+      var rootRef=firebase.database().ref().child("animales")
+>>>>>>> 78f23bdd9e282b5cbfdf8bd6b2b9a66155d12d3c
       var table = $('#tabla-datos').DataTable();
 
       //------------------------------- AGREGAR ------------------------------//
 
       rootRef.on("child_added",snap => {
       var dataSet = [snap.child("nombre").val(),
+<<<<<<< HEAD
                      snap.child("compuesto").val(),
                      snap.child("formato").val(),
                      snap.child("presentacion").val(),
@@ -150,6 +159,11 @@
                      snap.child("control").val(),
                      snap.child("cantidad").val(),
                      snap.child("recomendaciones").val(),
+=======
+                     snap.child("comida").val(),
+                     snap.child("proteina").val(),
+                     snap.child("cantidad").val(),                     
+>>>>>>> 78f23bdd9e282b5cbfdf8bd6b2b9a66155d12d3c
                      '<input style="width: 35pt; height: 16pt" type="number" min="0" value="" id="'+ snap.key + 'input-agregar" class="" autocomplete="off">',
                      '<select style="width: 60pt; height: 16pt;" name="control" id="'+ snap.key+ "select-agregar" +'">'+
                        '<option value="Agregar">Agregar</option>' +
@@ -166,6 +180,7 @@
                                .to$()
                                .addClass(snap.key);
 
+<<<<<<< HEAD
       $('td:contains("Sin Stock")').filter(function() {
         return $(this).text() == "Sin Stock";
       }).css("color", "red");
@@ -175,11 +190,18 @@
       //TODO TODO Comida recomendada para el mes, (cuantos kilos) dependiendo de la cantidad de animales. TODO TODO TODO
       //TODO TODO Comida recomendada para el mes, (cuantos kilos) dependiendo de la cantidad de animales. TODO TODO TODO
       //TODO TODO Comida recomendada para el mes, (cuantos kilos) dependiendo de la cantidad de animales. TODO TODO TODO
+=======
+
+      table.draw();
+
+
+>>>>>>> 78f23bdd9e282b5cbfdf8bd6b2b9a66155d12d3c
       });
 
       //------------------------------- EDITAR ------------------------------//
 
       rootRef.on("child_changed", snap => {
+<<<<<<< HEAD
 
         document.getElementsByClassName(snap.key)[0].innerHTML =
          "<tr id='" + snap.key +"'>" +
@@ -191,6 +213,14 @@
             "<td>" + snap.child("control").val() + "</td>"+
             "<td>" + snap.child("cantidad").val() + "</td>"+
             "<td>" + snap.child("recomendaciones").val() + "</td>"+
+=======
+        document.getElementsByClassName(snap.key)[0].innerHTML =
+         "<tr id='" + snap.key +"'>" +
+            "<td>"+ snap.child("nombre").val() + "</td>"+
+            "<td>" + snap.child("comida").val() + "</td>"+
+            "<td>" + snap.child("proteina").val() + "</td>"+
+            "<td>" + snap.child("cantidad").val() + "</td>"+            
+>>>>>>> 78f23bdd9e282b5cbfdf8bd6b2b9a66155d12d3c
             "<td>" + '<input style="width: 35pt; height: 16pt" type="number" min="0" value="" id="' + snap.key + "input-agregar" + '" class="" autocomplete="off">' + "</td>" +
             "<td>" + '<select style="width: 60pt; height: 16pt;" name="control" id="'+ snap.key+ "select-agregar" +'">'+
               '<option value="Agregar">Agregar</option>' +
@@ -203,6 +233,7 @@
             "<td>" + '<button class="btn btn-danger btn-xs borrar" data="'
             + snap.key +'"><span class="glyphicon glyphicon-trash"></span></button>' + "</td>"+
           "</tr>";
+<<<<<<< HEAD
           alertify.success("Editado con éxito");
 
           $('td:contains("Sin Stock")').filter(function() {
@@ -212,6 +243,30 @@
 
       rootRef.on("child_removed", snap => {
         alertify.success("Producto eliminado");
+=======
+
+          /*$(".editar").on("click", editarDato);
+          $(".borrar").on("click", borrarDato);
+          $(".yes").on("click", agregarQuitarElementos);*/
+
+          /*var elementosEditables = document.getElementsByClassName("editar");
+          for (var i = 0; i < elementosEditables.length; i++) {
+            elementosEditables[i].addEventListener("click", editarDato, false);
+          }
+          var elementosBorrables = document.getElementsByClassName("borrar");
+          for (var i = 0; i < elementosBorrables.length; i++) {
+            elementosBorrables[i].addEventListener("click", borrarDato, false);
+          }
+          var elementosAceptables = document.getElementsByClassName("yes");
+          for (var i = 0; i < elementosAceptables.length; i++) {
+            elementosAceptables[i].addEventListener("click", agregarQuitarElementos, false);
+          }*/
+          alertify.success("Editado con éxito");
+      });
+
+      rootRef.on("child_removed", snap => {
+        alertify.success("Animal eliminado");
+>>>>>>> 78f23bdd9e282b5cbfdf8bd6b2b9a66155d12d3c
       });
       });
     </script>
@@ -228,7 +283,11 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li><a onmouseover="this.style.color='#cfcfcf';" onmouseout="this.style.color='white';" style="color: white" href="agroquimicos.html">Productos Agroquímicos</a></li>
+<<<<<<< HEAD
             <li><a onmouseover="this.style.color='#cfcfcf';" onmouseout="this.style.color='white';" style="color: white" href="">Animales</a></li>
+=======
+            <li><a onmouseover="this.style.color='#cfcfcf';" onmouseout="this.style.color='white';" style="color: white" href="animales.html">Animales</a></li>
+>>>>>>> 78f23bdd9e282b5cbfdf8bd6b2b9a66155d12d3c
             <li><div style="width: 1px; height: 18pt; background: white; margin-top: 9pt;"></div></li>
             <li><a onmouseover="this.style.color='#cfcfcf';" onmouseout="this.style.color='white';" style="color: white" href="calculadora.html">Conversión Unidades</a></li>
             <!-- <button type="button" id="btn-usuarios" style="display: none;" class="btn btn-success btn-sm navbar-btn" name="button" onclick="location.href = 'https://console.firebase.google.com/u/0/project/inventario-sidal/authentication/users';">Gestionar Usuarios</button>
@@ -258,11 +317,16 @@
           <span style="font-size: 25pt; margin-top: 5px; margin-right: 15px;" class="close">&times;</span>
           <form style="font-size: 10pt" id="form-datos" autocomplete="off">
             <div class="form-group col-sm-12">
+<<<<<<< HEAD
               <label for="nombre">Nombre comercial <span style="color: #c53531">*</span></label>
+=======
+              <label for="nombre">Nombre<span style="color: #c53531">*</span></label>
+>>>>>>> 78f23bdd9e282b5cbfdf8bd6b2b9a66155d12d3c
               <input type="text" name="nombre" value="" id="nombre" class="form-control" autocomplete="off">
             </div>
 
             <div class="form-group col-sm-12">
+<<<<<<< HEAD
               <div style="margin:0; padding: 0;" class="col-sm-4">
                 <label for="Compuesto">Compuesto <span style="color: #c53531">*</span></label>
                 <select style="width: 131pt; height:27pt;"name="compuesto" id="compuesto"form="compuesto-form">
@@ -312,17 +376,38 @@
               </div>
             </div>
             <input style="margin-left: 11pt; margin-right: 11pt; width:396pt; "type="submit" name="enviar" value="Agregar" class="btn btn-primary btn-lg" id="btn-enviar">
+=======
+              <div style="margin:0; padding: 0;" class="col-sm-6">
+                <label for="comida">Comida diaria (Kg) <span style="color: #c53531">*</span></label>
+                <input style="width: 197pt;" type="number" min="0" name="comida" value="" id="comida" class="form-control" autocomplete="off">
+              </div>
+            </div>
+
+            <div class="form-group col-sm-12">              
+              <div style="margin:0; padding: 0;" class="col-sm-6">
+                <label for="proteina">Cantidad de proteina <span style="color: #c53531">*</span></label>
+                <input style="width: 198pt;" type="number" min="0" name="proteina" value="" id="proteina" class="form-control" step="0.1" autocomplete="off">
+              </div>
+            </div>
+            
+            <input style="margin-left: 11pt; margin-right: 11pt; width:396pt; " type="submit" name="enviar" value="Agregar" class="btn btn-primary btn-lg" id="btn-enviar">
+>>>>>>> 78f23bdd9e282b5cbfdf8bd6b2b9a66155d12d3c
           </form>
         </div>
       </div>
       <div class=" col-sm-12 row" id="row">
         <div class="col-sm-12 card">
+<<<<<<< HEAD
           <h3>Productos Agrícolas</h3>
+=======
+          <h3>Animales</h3>
+>>>>>>> 78f23bdd9e282b5cbfdf8bd6b2b9a66155d12d3c
           <div class="table-responsive">
             <table id="tabla-datos" class="table table-hover compact">
               <thead>
                 <tr>
                   <th>Nombre</th>
+<<<<<<< HEAD
                   <th>Compuesto</th>
                   <th>Formato</th>
                   <th>Presentación</th>
@@ -331,6 +416,12 @@
                   <th>Cantidad</th>
 
                   <th>Recomendaciones</th>
+=======
+                  <th>Comida diaria</th>
+                  <th>Cantidad de proteina</th>                  
+                  <th>Cantidad</th>
+
+>>>>>>> 78f23bdd9e282b5cbfdf8bd6b2b9a66155d12d3c
                   <th style="width: 45pt"></th>
                   <th style="width: 65pt"></th>
                   <th></th>
