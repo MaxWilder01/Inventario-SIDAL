@@ -1,17 +1,17 @@
   //------------------------------- WINDOW ON LOAD ----------------------------------//
 
-  
+
   if (localStorage.getItem('admin') == null && localStorage.getItem('operario') == null) {
 
     window.location.href = "index.html";
   }
-    
-  
+
+
   if (localStorage.getItem('admin') == 'false' && localStorage.getItem('operario') == 'false') {
     window.location.href = "index.html";
   }
-  
-  
+
+
   window.onload = inicializar;
 
   //-------------------------------- VARIABLES -------------------------------------//
@@ -22,10 +22,10 @@
   //------------------------------- INICIALIZAR -----------------------------------//
 
   function inicializar() {
-    
+
     if (localStorage.getItem('admin') == 'true') {
       document.getElementById('btn-usuarios').style.display= "inline";
-    }    
+    }
 
     modal            = document.getElementById('modal');
     formDatos        = document.getElementById("form-datos");
@@ -108,7 +108,7 @@
           nombre         : datos[0], compuesto   : datos[1],
           formato        : datos[2], control     : datos[3],
           presentacion   : datos[4], dosis       : datos[5],
-          recomendaciones: datos[6], cantidad    : 0
+          recomendaciones: datos[6], cantidad    : "Sin Stock"
         } ,function (error) {
             alertify.set('notifier','position', 'bottom-right');
             (error) ? alertify.error("No se pudo agregar el producto") : alertify.success("Agregado con éxito");
@@ -181,7 +181,7 @@
 
     var cantidadActual;
     var opcion            = opcionElegida( keyDatoEditar + "select-agregar");
-    var cantidadModificar = Number((document.getElementById(keyDatoEditar + "input-agregar")).value);    
+    var cantidadModificar = Number((document.getElementById(keyDatoEditar + "input-agregar")).value);
 
     firebase.database()
             .ref("productos-agroquimicos/" + keyDatoEditar)
@@ -195,9 +195,9 @@
                 alertify.error("No se puede quitar más de " + cantidadActual + " elementos");
               } else {
               var cantidadTotal = (opcion == "Agregar") ? cantidadActual + cantidadModificar
-                                                        : cantidadActual - cantidadModificar;                                                        
+                                                        : cantidadActual - cantidadModificar;
        if (cantidadTotal == 0) {
-        cantidadTotal = "SIN STOCK";        
+        cantidadTotal = "Sin Stock";
        }
        refDatoEditar.update({
          cantidad   : cantidadTotal

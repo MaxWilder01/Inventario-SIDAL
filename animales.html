@@ -166,13 +166,15 @@
                                .to$()
                                .addClass(snap.key);
 
-      /*$('td:contains("Sin Stock")').filter(function() {
+      $('td:contains("Sin Stock")').filter(function() {
         return $(this).text() == "Sin Stock";
-      }).css("color", "red");*/
+      }).css("color", "red");
 
       table.draw();
-
-
+      //TODO TODO Comida recomendada para el mes, (cuantos kilos) dependiendo de la cantidad de animales. TODO TODO TODO
+      //TODO TODO Comida recomendada para el mes, (cuantos kilos) dependiendo de la cantidad de animales. TODO TODO TODO
+      //TODO TODO Comida recomendada para el mes, (cuantos kilos) dependiendo de la cantidad de animales. TODO TODO TODO
+      //TODO TODO Comida recomendada para el mes, (cuantos kilos) dependiendo de la cantidad de animales. TODO TODO TODO
       });
 
       //------------------------------- EDITAR ------------------------------//
@@ -203,13 +205,12 @@
           "</tr>";
           alertify.success("Editado con éxito");
 
-          /*$('td:contains("Sin Stock")').filter(function() {
+          $('td:contains("Sin Stock")').filter(function() {
             return $(this).text() == "Sin Stock";
-          }).css("color", "red");*/
+          }).css("color", "red");
       });
 
       rootRef.on("child_removed", snap => {
-        
         alertify.success("Producto eliminado");
       });
       });
